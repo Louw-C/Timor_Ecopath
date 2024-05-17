@@ -27,7 +27,7 @@ Snappers_TL<-ggplot(Snappers, aes(Trophic_Level,Binomial, color=Estuarine_Connec
   geom_jitter(position=position_dodge(0.9), size=3)+
   labs(y = "Species")+
   ggtitle("Snappers and seaperches trophic levels")+
-  theme(legend.title = element_blank(),legend.text = element_text(size=11, face="italic"),panel.background = element_blank(),panel.grid.major=element_line(0.5, colour="Gray80"),
+  theme(legend.title = element_text(),legend.text = element_text(size=11, face="italic"),panel.background = element_blank(),panel.grid.major=element_line(0.5, colour="Gray80"),
         axis.text.x = element_text(size=11),axis.title.x=element_blank(),
         axis.text.y= element_text(size=11, face="italic"), axis.title.y= element_text(size=11))
 Snappers_TL
@@ -39,7 +39,7 @@ Mackerel_scad_TL<-ggplot(Mackerel_scad, aes(Trophic_Level,Binomial))+
   geom_jitter(position=position_dodge(0.9), size=3, color="Light Blue")+
   labs(y = "Species")+
   ggtitle("Mackerel scald trophic levels")+
-  theme(legend.title = element_blank(),legend.text = element_text(size=11, face="italic"),panel.background = element_blank(),panel.grid.major=element_line(0.5, colour="Gray80"),
+  theme(legend.title = element_text(),legend.text = element_text(size=11, face="italic"),panel.background = element_blank(),panel.grid.major=element_line(0.5, colour="Gray80"),
         axis.text.x = element_text(size=11),axis.title.x=element_blank(),
         axis.text.y= element_text(size=11, face="italic"), axis.title.y= element_text(size=11))
 Mackerel_scad_TL
@@ -51,7 +51,7 @@ Jacks_trevallies_TL<-ggplot(Jacks_trevallies, aes(Trophic_Level,Binomial, color=
   geom_jitter(position=position_dodge(0.9), size=3)+
   labs(y = "Species")+
   ggtitle("Jacks and trevallies trophic levels")+
-  theme(legend.title = element_blank(),legend.text = element_text(size=11, face="italic"),panel.background = element_blank(),panel.grid.major=element_line(0.5, colour="Gray80"),
+  theme(legend.title = element_text(),legend.text = element_text(size=11, face="italic"),panel.background = element_blank(),panel.grid.major=element_line(0.5, colour="Gray80"),
         axis.text.x = element_text(size=11),axis.title.x=element_blank(),
         axis.text.y= element_text(size=11, face="italic"), axis.title.y= element_text(size=11))
 Jacks_trevallies_TL
