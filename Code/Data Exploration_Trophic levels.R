@@ -2,7 +2,7 @@
 
 #Load data
 Timor_Fish<-read.csv(file.choose(),header=T,sep=",")
-names(Timor_Fish)
+names(Timor_Fish) 
 
 #########If you want to subset data use the following code##########
 #Exclude something
