@@ -1,83 +1,834 @@
-﻿Genus,Species,Binomial,Peskas_Group,Max_age,Max_length_cm,Common_length_cm,a,b,L_maturity_cm,Common_depth_range_m,Generation_time_years,Population_doubling_Years,Trophic_Level,Estuarine_Connection
-Lutjanus,Sebae,Lutjanus Sebae,Snappers and seaperches,40,116,60,0.01413,3.03,54.2,,6.9,1.4-4.4,4.1,No
-Etelis,carbunculus,Etelis carbunculus,Snappers and seaperches,32,127,65,0.01549,2.95,61,,,>14,4.5,No
-Aprion,virescens,Aprion virescens,Job Fishes,32,112,90,0.01413,2.94,45,,3.8,1.4-4.4,4.3,No
-Etelis,radiosus,Etelis radiosus,Snappers and seaperches,,80,,0.02042,2.95,,,5.1,1.4-4.4,4.5,No
-Lipocheilus,carnolabrum,Lipocheilus carnolabrum,Snappers and seaperches,,50,60,0.03467,2.91,,,5.1,1.4-4.4,3.9,No
-Pristipomoides,filamentosus,Pristipomoides filamentosus,Job Fishes,44,100,50,0.01072,2.93,52,,4.4,1.4-4.4,4.2,No
-Pristipomoides,typus,Pristipomoides typus,Job Fishes,11,70,,0.01175,2.96,,,4.3,1.4-4.4,4.2,No
-Pristipomoides,multidens,Pristipomoides multidens,Job Fishes,30,90,70,0.0166,2.95,41.7,,,1.4-4.4,3.8,No
-Symphorus,nemathoporus,Symphorus nemathoporus,Snappers and seaperches,,100,35,0.01202,3.03,,,4.8,1.4-4.4,4.1,No
-Lutjanus,argentimaculatus,Lutjanus argentimaculatus,Snappers and seaperches,31,150,80,0.01514,2.97,57,,5.9,,3.6,No
-Lutjanus,bitaeniatus,Lutjanus bitaeniatus,Snappers and seaperches,,30,,0.01479,2.97,,,,1.4-4.4,3.8,No
-Lutjanus,bohar,Lutjanus bohar,Snappers and seaperches,55,90,76,0.01349 ,2.99,42.9,,,1.4-4.4,4.3,No
-Lutjanus,erythropterus,Lutjanus erythropterus,Snappers and seaperches,8,81.6,45,0.01514,2.96,50.2,,,1.4-4.4,4.5,No
-Lutjanus,carponotatus,Lutjanus carponotatus,Snappers and seaperches,20,40,30,0.01479,2.96,18.6,,,1.4-4.4,3.9,No
-Lutjanus,decussates,Lutjanus decussates,Snappers and seaperches,,35,25,0.01778,2.98,,,,1.4-4.4,4,No
-Lutjanus,malabaricus,Lutjanus malabaricus,Snappers and seaperches,31,100,50,0.01549,2.97,57.6,,5.8,4.5-14 ,4.5,No
-Lutjanus,rufolineatus,Lutjanus rufolineatus,Snappers and seaperches,,30,,0.01995,3,,,,1.4-4.4,3.8,No
-Lutjanus,kasmira,Lutjanus kasmira,Snappers and seaperches,,40,20,0.01479,2.97,20.5,30-150,,1.4-4.4,3.9,No
-Lutjanus,quinquelineatus,Lutjanus quinquelineatus,Snappers and seaperches,31,38,30,0.01349,2.98,,Feb-40,,4.5-14 ,3.7,No
-Lutjanus,fulviflamma,Lutjanus fulviflamma,Snappers and seaperches,23,50,30,0.01585,2.97,19.1,12844,,1.4-4.4,3.8,Yes
-Lutjanus,rivulatus,Lutjanus rivulatus,Snappers and seaperches,,80,60,0.01549,3.02,,50-100,,1.4-4.4,4.1,Yes
-Lutjanus,vita,Lutjanus vita,Snappers and seaperches,12,40,35,0.01479,2.97,15.4,Oct-72,,1.4-4.4,4,No
-Lutjanus,russelli,Lutjanus russelli,Snappers and seaperches,,50,30,0.01318,2.98,,20-50,,1.4-4.4,4.1,Yes
-Lutjanus,lutjanus,Lutjanus lutjanus,Snappers and seaperches,11,35,,0.01622,2.95,12.2,0-96,,1.4-4.4,4.1,No
-Lutjanus,lemniscatus,Lutjanus lemniscatus,Snappers and seaperches,,65,35,0.01479,2.97,,Feb-80,,1.4-4.4,4,No
-Aphareus,rutilans,Aphareus rutilans,Job Fishes,,110,79,0.01549,2.93,,100-330,,1.4-4.4,4.1,No
-Lutjanus,adetii,Lutjanus adetii,Snappers and seaperches,40,50,30,0.01413,3.02,25,20,,1.4-4.4,3.7,No
-Lutjanus,bengalensis,Lutjanus bengalensis,Snappers and seaperches,,30,20,0.01479,2.97,,Oct-30,,1.4-4.4,3.8,No
-Lutjanus,biguttatus,Lutjanus biguttatus,Snappers and seaperches,,25,15,0.01479,2.97,,Mar-36,,<1.3,4,No
-Lutjanus,boutton,Lutjanus boutton,Snappers and seaperches,,35,20,0.01479,2.97,,Mar-50,1.8,<1.3,3.8,Yes
-Lutjanus,ehrenbergi,Lutjanus ehrenbergi,Snappers and seaperches,,35,20,0.01622,2.95,20.1,May-20,4.4,<1.3,3.8,Yes
-Lutjanus,fulvus,Lutjanus fulvus,Snappers and seaperches,34,40,25,0.01514,2.97,20.6,Jan-75,,1.4-4.4,3.6,Yes
-Lutjanus,gibbus,Lutjanus gibbus,Snappers and seaperches,18,56.8,45,0.01549,2.97,21.5,1-150,,1.4-4.4,4.1,No
-Lutjanus,johnii,Lutjanus johnii,Snappers and seaperches,,97,50,0.01514,2.92,51.9,0-80,6.9,1.4-4.4,4.2,No
-Lutjanus,lunulatus,Lutjanus lunulatus,Snappers and seaperches,,40,40,0.01479,2.97,,Oct-30,,1.4-4.4,4,No
-Lutjanus,madras,Lutjanus madras,Snappers and seaperches,,30,20,0.01479,2.97,,,,,3.8,No
-Lutjanus,monostigma,Lutjanus monostigma,Snappers and seaperches,,60,50,0.01479,2.95,,Jan-60,,1.4-4.4,4.3,No
-Lutjanus,semicinctus ,Lutjanus semicinctus ,Snappers and seaperches,,35,20,0.01288,3.03,,0-36,,1.4-4.4,4.1,No
-Lutjanus,timoriensis ,Lutjanus timoriensis ,Snappers and seaperches,,73.7,30,0.01413,3.04,,20-150,12.8,4.5-14,4,No
-Paracaesio,sordida,Paracaesio sordida,Snappers and seaperches,,48,27.5,0.01622,3.07,,5-100,,1.4-4.4,2.8,No
-Paracaesio,xanthurus,Paracaesio xanthurus,Snappers and seaperches,,50,,0.01905,3.08,,5-250,,1.4-4.4,3.4,No
-Pristipomoides,auricilla,Pristipomoides auricilla,Job Fishes,,45,25,0.01318,2.98,,181-270,3.1,1.4-4.4,3.9,No
-Pristipomoides,flavipinnis,Pristipomoides flavipinnis,Job Fishes,,76.6,35,0.01479,2.95,,90-360,,1.4-4.4,3.6,No
-Pristipomoides,zonatus,Pristipomoides zonatus,Job Fishes,,57.5,35,0.01349,2.94,,125-275,4.7,1.4-4.4,4,No
-Epinephelus ,fuscoguttatus,Epinephelus  fuscoguttatus,Groupers,40,120,50,0.01047,3.03,48,Jan-60,,1.4-4.4,4.1,No
-Ctenochaetus,striatus ,Ctenochaetus striatus ,Surgeonfishes,36,26,18,0.02344,2.97,,Jun-30,1.4,4.5-14,2,No
-Mene ,maculata ,Mene  maculata ,Moonfishes,,30,20,0.02089,3.04,14,50-200,,<1.3,3.5,Yes
-Amblygaster ,sirm,Amblygaster  sirm,Sardines and Herring,8,27,20,0.00851,3.04,15,Oct-75,1.2,<1.3,2.9,No
-Triaenodon ,obesus ,Triaenodon  obesus ,Sharks,25,213,160,0.00339,3.13,107,Aug-40,,>14,4.2,No
-Rastrelliger ,brachysoma ,Rastrelliger  brachysoma ,Short bodied mackerel,2,34.5,20,0.00955,3.06,17.3,15-200,0.9,<1.3,2.7,Yes
-Mobula ,alfredi ,Mobula  alfredi ,Other?,31,500,,0.01,3.04,371.1,1-120,,>14,3.5,No
-Epinephelus ,fasciatus ,Epinephelus  fasciatus ,Groupers,,52,22,0.01148,3.03,,20-45,,4.5-14,3.7,No
-Thunnus ,albacares ,Thunnus  albacares ,Tuna/Bonito/Other Mackerel,9,239,150,0.01479,3.03,103.3,1-1602,2.8,1.4-4.4,4.4,No
-Lethrinus  ,ornatus ,Lethrinus   ornatus ,Emperors,,45,,0.01905,3.02,,May-30,,<1.3,3.4,No
-Auxis, thazard ,Auxis  thazard ,Tuna/Bonito/Other Mackerel,5,65,60,0.00977,3.07,29.5,50-,1.5,1.4-4.4,4.4,No
-Macolor ,macularis,Macolor  macularis,Snappers and seaperches,,60,,0.01585,2.99,,0-90,,1.4-4.4,4,No
-Macolor ,niger,Macolor  niger,Snappers and seaperches,,75,35,0.01585,2.99,,Feb-90,,1.4-4.4,4,No
-Pterocaesio ,tile,Pterocaesio  tile,Fusilier,,30,21.2,0.01259,3.15,,0-60,,<1.3,3.3,No
-Caesio,teres,Caesio teres,Fusilier,,40,26.6,0.01288,3.12,,May-60,,<1.3,3.4,No
-Caesio,lunaris,Caesio lunaris,Fusilier,,40,,0.0166,3.1,,0-50,,<1.3,3.4,No
-Paracaesio,xanthura,Paracaesio xanthura,Snappers and seaperches,,50,,0.01905,3.08,,5-250,,1.4-4.4,3.4,No
-Scomberomorus ,commerson ,Scomberomorus  commerson ,Tuna/Bonito/Other Mackerel,22,240,120,0.00661,3,75.2,Oct-70,3.6,1.4-4.4,4.5,Yes
-Caranx ,melampygus ,Caranx  melampygus ,Jacks and trevallies,,117,60,0.01778,2.95,35,0-190,,1.4-4.4,4.5,Yes
-Siganus,argenteus,Siganus argenteus,Spinefoot,,40,25,0.01413,2.99,,Jan-30,,<1.3,2,No
-Siganus,guttatus,Siganus guttatus,Spinefoot,,42,25,0.0166,3.07,18.1,0-25,0.8,<1.3,2.7,Yes
-Myripristis ,murdjan,Myripristis  murdjan,Soldierfishes,,60,18,0.0182,3.06,17.5,Jan-50,,1.4-4.4,3.4,No
-"Acanthurus	",nigricans,"Acanthurus	 nigricans",Surgeonfishes,34,36,,0.0263,2.93,,Feb-67,3.9,1.4-4.4,2,No
-Arius ,arius,Arius  arius,Threadfins,,40,15,0.00589,3.13,,,,1.4-4.4,3.5,Yes
-Pseudobalistes,flavimarginatus,Pseudobalistes flavimarginatus,Triggerfishes,,60,,0.0257,2.94,,Feb-80,2.2,<1.3,2.8,No
-Tylosurus ,crocodilus,Tylosurus  crocodilus,Garfishes,,150,90,0.00093,3.14,51.7,0-13,3.7,1.4-4.4,4.4,No
-Alectis ,ciliaris,Alectis  ciliaris,Jacks and trevallies,,150,100,0.02188,2.84,,60-100,,4.5-14,4,No
-Atropus ,hedlandensis,Atropus  hedlandensis,Jacks and trevallies,,32,,0.02884,2.92,,-40,,<1.3,3.8,No
-Carangoides ,praeustus,Carangoides  praeustus,Jacks and trevallies,,29,16,0.01445,2.97,,,,<1.3,3.7,No
-Caranx,ignobilis,Caranx ignobilis,Jacks and trevallies,,170,100,0.01862,2.95,60,10-188,13.7 - check?,1.4-4.4,4.2,Yes
-Caranx,lugubris,Caranx lugubris,Jacks and trevallies,,100,70,0.01738,2.95,,24-65,9.2,4.5-14,4.5,No
-Caranx ,sexfasciatus,Caranx  sexfasciatus,Jacks and trevallies,,120,60,0.0182,2.95,42,0-146,4.6,1.4-4.4,4.5,Yes
-Caranx ,tille,Caranx  tille,Jacks and trevallies,,80,50,0.0138,2.99,,30-120,3.8,1.4-4.4,4.1,No
-Decapterus,macarellus,Decapterus macarellus,Mackerel scad,,46,30,0.01349,2.99,,40-200,3.9,<1.3,4,No
-Decapterus ,macrosoma,Decapterus  macrosoma,Mackerel scad,,35,25,0.01047,2.96,16.8,30-70,1.2,<1.3,3.4,No
-Elagatis ,bipinnulata,Elagatis  bipinnulata,Mackerel scad,6,180,90,0.01,2.85,64.6,02-Oct,,1.4-4.4,4.3,No
-Ferdauia ,ferdau,Ferdauia  ferdau,Jacks and trevallies,,70,30,0.01905,2.95,,0-60,5.2,1.4-4.4,4.3,No
-Ferdauia ,orthogrammus,Ferdauia  orthogrammus,Jacks and trevallies,,75,40,0.01349,2.97,,0-168,,1.4-4.4,4.5,No
+﻿Genus,Species,Peskas_Group,Max_age,Max_length_cm,Common_length_cm,a,b,L_maturity_cm,Common_depth_range_m,Generation_time_years,Population_doubling_Years,Spawning,Trophic_Level,Food 1,Food 2,Food 3
+Lutjanus,Sebae,Snappers and seaperches,40,116,60,0.01413,3.03,54.2,,6.9,1.4-4.4,Broadcast,4.1,"Zoobenthos
+Nekton","Benthic crustaceans
+Planktonic crustaceans
+Finfish
+Worms
+Cephalopods","Bony fish
+Squid/cuttlefish
+Crabs
+Shrimps/prawns
+Stomatopods
+Mysids
+Polychaetes"
+Etelis,carbunculus,Snappers and seaperches,32,127,65,0.01549,b=2.95,61,,,>14,,4.5,"Nekton
+Zoobenthos","Cephalopods
+Finfish
+Benthic crustaceans
+Pelagic inverts","Bony fish
+Squid/cuttlefish
+Crabs
+Shrimps/prawns
+Uruchordate"
+Aprion,virescens,Job Fishes,32,112,90,0.01413,2.94,45,,3.8,1.4-4.4,,4.3,"Nekton
+Zoobenthos
+Zooplankton","Cephalopods
+Finfish
+Benthic crustaceans
+Pelagic inverts","Bony fish
+Squid/cuttlefish
+Crabs
+Shrimps/prawns"
+Etelis,radiosus,Snappers and seaperches,,80,,0.02042,2.95,,,5.1,1.4-4.4,,4.5,Nekton,Finfish,Fin fish
+Lipocheilus,carnolabrum,Snappers and seaperches,,50,60,0.03467,b=2.91,,,5.1,1.4-4.4,,3.9,"Nekton
+Zoobenthos","Benthic crustaceans
+Finfish
+","Bony fish
+Other benthic crustaceans
+Other benthic inverts"
+Pristipomoides,filamentosus,Job Fishes,44,100,50,0.01072,2.93,52,,4.4,1.4-4.4,,4.2,"Zoobenthos
+Nekton
+Zooplankton","Cephalopods
+Finfish
+Benthic crustaceans
+Echinoderms
+Tunicates/sponges
+Planktonic inverts","Ascidians
+Squid/cuttlefish
+Amphipods
+Crabs
+Shrimps/prawns
+Echinoderms"
+Pristipomoides,typus,Job Fishes,11,70,,0.01175,2.96,,,4.3,1.4-4.4,,4.2,"Nekton
+Zoobenthos","Cephalopods
+Finfish
+Benthic crustaceans","Squids/cuttelfish
+Shrimps/prawns
+Finfish"
+Pristipomoides,multidens,Job Fishes,30,90,70,0.0166,2.95,41.7,,,1.4-4.4,"multiple spawner, perhaps a serial spawner",3.8,"Zoobenthos
+Nekton
+Zooplankton","Benthic crustaceans
+Finfish
+Planktonic inverts
+Cephalopods
+Mollusks
+Sponges/tunicates","Shrimps/prawns - Heterocarpus ensifer
+Squids/cuttlefish
+Bony fish
+Crabs
+Lobsters
+Stomatopods
+Gastropods
+Ascisians"
+Symphorus,nemathoporus,Snappers and seaperches,,100,35,0.01202,3.03,,,4.8,1.4-4.4,,4.1,"Nekton
+Zoobenthos","Finfish
+Benthic crustaceans","Finfish
+Bony fish
+Crustaceans"
+Lutjanus,argentimaculatus,Snappers and seaperches,31,150,80,0.01514,2.97,57,,5.9,,,3.6,"Zoobenthos
+Nekton","Benthic crustaceans
+Planktonic crustaceans
+Finfish","Crabs
+Shirmps
+Mysids
+Bony Fish"
+Lutjanus,bitaeniatus,Snappers and seaperches,,30,,0.01479,2.97,,,,1.4-4.4,,3.8,,,
+Lutjanus,bohar,Snappers and seaperches,55,90,76,0.01349 ,2.99,42.9,,,1.4-4.4,Form aggregations,4.3,"Zoobenthos
+Nekton","Benthic crustaceans
+Finfish
+Mollusks
+Sponges/tunicates","Amphipods
+Shrimps/prawns
+Stomatopods
+Gastropods
+Ascidians
+Crabs"
+Lutjanus,erythropterus,Snappers and seaperches,8,81.6,45,0.01514,2.96,50.2,,,1.4-4.4,Serial batch,4.5,"Zoobenthos
+Nekton
+Zooplankton","Fish
+Cehalopods
+Finfish
+Benthic crustaceans","Fish eggs/larvae (chanos chanos)
+Squids/cuttelfish"
+Lutjanus,carponotatus,Snappers and seaperches,20,40,30,0.01479,2.96,18.6,,,1.4-4.4,,3.9,"Zoobenthos
+Nekton","Benthic crustaceans
+Finfish","Benthic crustaceans
+Bony fish"
+Lutjanus,decussates,Snappers and seaperches,,35,25,0.01778,2.98,,,,1.4-4.4,,4,"Zoobenthos
+Nekton","Benthic crustaceans
+Finfish","Benthic crustaceans
+Bony fish"
+Lutjanus,malabaricus,Snappers and seaperches,31,100,50,0.01549,2.97,57.6,,5.8,4.5-14 ,Batch and serial,4.5,"Nekton
+Zoobenthos","Cephalopods
+Finfish
+Benthic crustaceans","Squids/cuttelfish (Loligo; Sepia)
+Shrimps/prawns (Nemipterus; Panaeus)
+Bony fish"
+Lutjanus,rufolineatus,Snappers and seaperches,,30,,0.01995,3,,,,1.4-4.4,,3.8,,,
+Lutjanus,kasmira,Snappers and seaperches,,40,20,0.01479,2.97,20.5,30-150,,1.4-4.4,,3.9,"Nekton
+Plants
+Zoobenthos","Finfish
+Cephalopods
+Plants
+Benthic crustaceans
+Planktonic crustaceans","Finfish - Ctenochaetus striatus
+Squid/cuttlefish
+Benthic algae/seaweed
+Shrimps/prawns
+Stomatopods
+Crabs
+Bony fish
+Benthic crustaceans"
+Lutjanus,quinquelineatus,Snappers and seaperches,31,38,30,0.01349,2.98,,Feb-40,,4.5-14 ,,3.7,"Nekton
+Zoobenthos","Finfish
+Benthic crustaceans","Other finfish
+Benthic crustaceans
+Bony fish"
+Lutjanus,fulviflamma,Snappers and seaperches,23,50,30,0.01585,2.97,19.1,12844,,1.4-4.4,,3.8,"Nekton
+Zoobenthos","Finfish
+Benthic crustaceans
+Other benthic inverts
+Planktonic crustaceans","Bony fish
+Finfish
+Crabs
+Mysids
+Shrimps/prawns
+Other benthic inverts/crustaceans"
+Lutjanus,rivulatus,Snappers and seaperches,,80,60,0.01549,3.02,,50-100,,1.4-4.4,,4.1,"Nekton
+Zoobenthos","Cephalopods
+Finfish
+Benthic crustaceans
+Other benthic inverts","Squids/cuttelfish
+Shrimps/prawns
+Finfish
+Other benthic crustaceans/inverts"
+Lutjanus,vita,Snappers and seaperches,12,40,35,0.01479,2.97,15.4,Oct-72,,1.4-4.4,,4,"Zoobenthos
+Nekton","Benthic crustaceans
+Worms
+Finfish","Shrimps/prawns - Penaeus spp.
+Non-annelids - Ptychodera sp.
+Bony fish - Spratelloides delicatulus
+Crabs - swimming crabs
+Stomatopods
+Polychaetes"
+Lutjanus,russelli,Snappers and seaperches,,50,30,0.01318,2.98,,20-50,,1.4-4.4,,4.1,"Nekton
+Zoobenthos","Benthic crustaceans
+Finfish
+Plantonic crustaceans","Crabs - hermits
+Finfish
+Shrimps/prawns
+Euphausiids
+Mysids"
+Lutjanus,lutjanus,Snappers and seaperches,11,35,,0.01622,2.95,12.2,0-96,,1.4-4.4,,4.1,"Zoobenthos
+Nekton","Benthic crustaceans
+Finfish","Shrimps/prawns
+Bony fish
+Other benthic crustaceans"
+Lutjanus,lemniscatus,Snappers and seaperches,,65,35,0.01479,2.97,,Feb-80,,1.4-4.4,,4,"Nekton
+Zoobenthos","Finfish
+Benthic crustaceans","Other finfish
+Other benthic crustaceans"
+Aphareus,rutilans,Job Fishes,,110,79,0.01549,2.93,,100-330,,1.4-4.4,,4.1,"Nekton
+Zoobenthos","Cephalopods
+Finfish
+Benthic crustaceans","Squids/cuttlefish
+Other benthic crustaceans
+Other finfish"
+Lutjanus,adetii,Snappers and seaperches,40,50,30,0.01413,3.02,25,20,,1.4-4.4,,3.7,"Zoobenthos
+Nekton","Benthic crustaceans
+Finfish","Other benthic crustaceans
+Finfish"
+Lutjanus,bengalensis,Snappers and seaperches,,30,20,0.01479,2.97,,Oct-30,,1.4-4.4,,3.8,"Zoobenthos
+Nekton","Benthic crustaceans
+Finfish","Other benthic crustaceans
+Finfish"
+Lutjanus,biguttatus,Snappers and seaperches,,25,15,0.01479,2.97,,Mar-36,,<1.3,,4,"Zoobenthos
+Nekton","Benthic crustaceans
+Finfish","Other finfish
+Other benthic crustaceans"
+Lutjanus,boutton,Snappers and seaperches,,35,20,0.01479,2.97,,Mar-50,1.8,<1.3,,3.8,"Nekton
+Zoobenthos
+Zooplankton","Cephalopods
+Finfish
+Benthic crustaceans
+Plankton crustaceans","Squids/cuttelfish
+Shrimps/prawns
+other finfish
+Crabs
+Other plankton crustaceans"
+Lutjanus,ehrenbergi,Snappers and seaperches,,35,20,0.01622,2.95,20.1,May-20,4.4,<1.3,,3.8,,,
+Lutjanus,fulvus,Snappers and seaperches,34,40,25,0.01514,2.97,20.6,Jan-75,,1.4-4.4,,3.6,"Nekton
+Zoobenthos","Finfish
+Benthic crustaceans
+Cephalopods
+Echinoderms
+Worms
+Sponges/tunicates","Bony fish - Acanthurus triostegus; ctenochaetus striatus
+Squid/cuttlefish
+Crabs
+Shrimps/prawns
+Crabs
+Amphipods
+Stomatopods
+Other echinoderms
+Sea cucumbers
+Ascidians
+Non-annelids
+Other finfish - Neoniphon sammara"
+Lutjanus,gibbus,Snappers and seaperches,18,56.8,45,0.01549,2.97,21.5,1-150,,1.4-4.4,,4.1,"Zoobenthos
+Nekton","Benthic crustaceans
+Finfish
+Mollusks
+Worms
+Echinoderms
+Other benthic inverts","Shrimps/prawns
+Bony fish
+Crabs
+Gastropods
+octopi
+Non-annelids
+Lobsters
+Stomatopods
+Seastars
+Polychaetes
+Sea cucumbers
+Other benthic inverts"
+Lutjanus,johnii,Snappers and seaperches,,97,50,0.01514,2.92,51.9,0-80,6.9,1.4,,4.2,"Detritus
+Nekton
+Zoobenthos","Detritus
+Finfish
+Cephalopod
+Mollusk
+Benthic crustaceans","Carcasses
+Bony fish - Decapterus spp. 
+Squids/cuttlefish
+Octopi
+Crabs
+Shrimps/prawns
+Other finfish"
+Lutjanus,lunulatus,Snappers and seaperches,,40,40,0.01479,2.97,,Oct-30,,1.4-4.4,,4,"Zoobenthos
+Nekton","Benthic crustaceans
+Finfish","Other benthic crustaceans
+Finfish"
+Lutjanus,madras,Snappers and seaperches,,30,20,0.01479,2.97,,,,,,3.8,,,
+Lutjanus,monostigma,Snappers and seaperches,,60,50,0.01479,2.95,,Jan-60,,1.4-4.4,,4.3,"Nekton
+Zoobenthos","Finfish
+Benthic crustaceans","Bony fish - Ctenochaetus striatus; Decapterus macarellus; goat fish; Selar crumenophthalmus
+Other benthic crustaceans
+Other finfish"
+Lutjanus,semicinctus ,Snappers and seaperches,,35,20,0.01288,3.03,,0-36,,1.4-4.4,,4.1,"Zoobenthos
+Nekton","Benthic crustaceans
+Finfish","Other benthic crustaceans
+Bony fish"
+Lutjanus,timoriensis ,Snappers and seaperches,,73.7,30,0.01413,3.04,,20-150,12.8,4.5-14,,4,"Zoobenthos
+Nekton","Benthic crustaceans
+Finfish","Other benthic crustaceans
+Bony fish"
+Paracaesio,sordida,Snappers and seaperches,,48,27.5,0.01622,3.07,,5-100,,1.4-4.4,,2.8,Zooplankton,Other plankton inverts,Other plankton inverts
+Paracaesio,xanthurus,Snappers and seaperches,,50,,0.01905,3.08,,5-250,,1.4-4.4,,3.4,Zooplankton,Other plankton inverts,Other plankton inverts
+Pristipomoides,auricilla,Job Fishes,,45,25,0.01318,2.98,,181-270,3.1,1.4-4.4,,3.9,"Zoobenthos
+Nekton","Other plankton inverts
+Finfish","Other plankton inverts - salps
+Finfish"
+Pristipomoides,flavipinnis,Job fishes,,76.6,35,0.01479,2.95,,90-360,,1.4-4.4,,3.6,"Zoobenthos
+Nekton","Finfish
+Benthic crustaceans
+Sponges/tunicates
+Other benthic inverts","Other finfish
+Other benthic crustaceans
+Ascidians
+Other plankton inverts"
+Pristipomoides,zonatus,Job Fishes,,57.5,35,0.01349,2.94,,125-275,4.7,1.4-4.4,,4,"Nekton
+Zoobenthos","Cephalopods
+Finfish
+Benthic crustaceans
+Sponges/tunicates","Squids/cuttelfish
+Shrimps/prawns
+Other finfish
+Crabs
+Ascidians"
+Epinephelus ,fuscoguttatus,Groupers,40,120,50,0.01047,3.03,48,Jan-60,,1.4-4.4,,4.1,"Nekton
+Zoobenthos","Finfish
+Benthic crustaceans","Bonyfish - parupeneus trifasciatus; Sargocentron diadema; spratelloides delicatulus
+Crabs - Thalamita sp.
+Shrimps/prawns
+Other benthic crustaceans"
+Ctenochaetus,striatus ,Surgeonfishes,36,26,18,0.02344,2.97,,Jun-30,1.4,4.5-14,Full moon spawning in large groups,2,"Plants
+Detritus","Phytoplankton
+Detritus","Blue-green algae
+Diatoms
+Debris"
+Mene ,maculata ,Moonfishes,,30,20,0.02089,3.04,14,50-200,,<1.3,,3.5,"Zoobenthos
+Zooplankton","Other plankton inverts
+Other benthic inverts","Other plankton inverts
+Other benthic inverts"
+Amblygaster ,sirm,Sardines and Herring,8,27,20,0.00851,3.04,15,Oct-75,1.2,<1.3,Spawn in schools,2.9,"Zooplankton
+Plants","Plankton crustaceans
+Phytoplankton
+Other plankton inverts","Other plankton crustaceans - Brachyura
+Dinoflagellates - Ceratium sp.; Peridinium sp.
+Other plankton inverts
+Euphausiids
+Plankton copepods"
+Triaenodon ,obesus ,Sharks,25,213,160,0.00339,3.13,107,Aug-40,,>14,,4.2,"Nekton
+Zoobenthos","Finfish
+Benthic crustaceans
+Mollusks","Bony fish - Gymnothorax sp.; Lutjanus kasmira; Myripristis; scarus sordidus; scarus spp. 
+Lobsters
+Octopi
+Other benthic crustaceans
+Other mollusks"
+Rastrelliger ,brachysoma ,Short bodied mackerel,2,34.5,20,0.00955,3.06,17.3,15-200,0.9,<1.3,,2.7,"Plants
+Zooplankton","Phytoplankton
+Other plankton inverts","Phytoplankton
+Other plankton inverts"
+Mobula ,alfredi ,Mantas - no Peskas group?,31,500,,0.01,3.04,371.1,1-120,,>14,,3.5,"Zooplankton
+Nekton","Finfish
+Plankton crustaceans","Plankton crustaceans
+Small finfish"
+Epinephelus ,fasciatus ,Groupers,,52,22,0.01148,3.03,,20-45,,4.5-14,,3.7,"Zoobenthos
+Nekton","Mollusk
+Benthic crustacean
+Finfish
+Echinoderm","Crabs
+Bony fish
+Other cephalopods
+Octopi
+Other echinoderm
+Stomatopod
+Shrimps/prawns"
+Thunnus ,albacares ,Tuna/Bonito/Other Mackerel,9,239,150,0.01479,3.03,103.3,1-1602,2.8,1.4-4.4,"Peak spawning occurs during the summer, in batches. Eggs and larvae are pelagic.",4.4,A lot of diet data - check,,
+Lethrinus  ,ornatus ,Emperors,,45,,0.01905,3.02,,May-30,,<1.3,,3.4,"Zoobenthos
+Nekton","Benthic crustaceans
+Worms
+Finfish
+Mollusks
+Echinoderms","Amphipods - gammarid amphipods
+Benthic copepods -harpacticoid copepod
+Sea cucumber - holothuria
+Other echinoderms - sanddollar
+Other benthic crustaceans - tanaids
+Crabs
+Bivalves
+Polychaetes"
+Auxis, thazard ,Tuna/Bonito/Other Mackerel,5,65,60,0.00977,3.07,29.5,50-,1.5,1.4-4.4,,4.4,"Nekton
+Zoobenthos","Finfish
+Benthic crustaceans
+Cephalopods","Bony fish - Anchovies; Auxis thazard; filefish; flying fish; Katsowanus palemis; Mene maculata; Nematalosa japonica; 	Trachurus japonicus"
+Macolor ,macularis,Snappers and seaperches,,60,,0.01585,2.99,,0-90,,1.4-4.4,,4,"Nekton
+Zoobenthos
+Zooplankton","Finfish
+Benthic crustaceans
+Other plankton inverts","Finfish
+Benthic crustaceans
+Other plankton inverts"
+Macolor ,niger,Snappers and seaperches,,75,35,0.01585,2.99,,Feb-90,,1.4-4.4,,4,"Nekton
+Zoobenthos","Finfish
+Benthic crustaceans","Finfish
+Benthic crustaceans"
+Pterocaesio ,tile,Fusilier,,30,21.2,0.01259,3.15,,0-60,,<1.3,,3.3,Zooplankton,"Fish (early stages)
+Other plankton inverts
+Plankton crustaceans","Fish eggs 
+Other fish inverts
+Plankton copepods"
+Caesio,teres,Fusilier,,40,26.6,0.01288,3.12,,May-60,,<1.3,Mass spawning of this species observed to occur only around sunset at or near full moon.,3.4,Zooplankton,Other plankton inverts,Other plankton inverts
+Caesio,lunaris,Fusilier,,40,,0.0166,3.1,,0-50,,<1.3,,3.4,Zooplankton,Other plankton inverts,Other plankton inverts
+Paracaesio,xanthura,Snappers and seaperches,,50,,0.01905,3.08,,5-250,,1.4-4.4,,3.4,Zooplankton,Other plankton inverts,Other plankton inverts
+Scomberomorus ,commerson ,Tuna/Bonito/Other Mackerel,22,240,120,0.00661,3,75.2,Oct-70,3.6,1.4-4.4,,4.5,"Nekton
+Zooplankton","Finfish
+Fish (early stages)
+Bony fish
+Cephalopods
+Other plankton inverts
+Benthic crustaceans
+Plankton crustaceans","Bony fish - Anchoviella sp.; finny scad; Stolephorus sp.; Triggerfish; 	unspecified Carangidae; unspecified Clupeidae; unspecified Engraulidae
+Fish eggs
+Squids/cuttlefish - Loligo spp. 
+Shrimps/prawns
+Plankton copepods
+Other plankton inverts
+Other plankton crustraceans"
+Caranx ,melampygus ,Jacks and trevallies,,117,60,0.01778,2.95,35,0-190,,1.4-4.4,,4.5,A lot of diet data - check,,
+Siganus,argenteus,Spinefoot,,40,25,0.01413,2.99,,Jan-30,,<1.3,,2,"Plants
+Zoobenthos","Other plants
+Other benthic inverts","Benthic algae/seaweed
+Other benthic inverts"
+Siganus,guttatus,Spinefoot,,42,25,0.0166,3.07,18.1,0-25,0.8,<1.3,,2.7,"Plants
+Zooplankton","Other plants
+Other plankton inverts","Benthic algae/seaweed
+Other plankton inverts"
+Myripristis ,murdjan,Soldierfishes,,60,18,0.0182,3.06,17.5,Jan-50,,1.4-4.4,,3.4,"Zooplankton
+Nekton
+Zoobenthos","Plankton crustaceans
+Worms
+Finfish","Mysids
+Polychaetes
+Other planton crustaceans - crab larvae
+Other finfish"
+"Acanthurus	",nigricans,Surgeonfishes,34,36,,0.0263,2.93,,Feb-67,3.9,1.4-4.4,,2,"Detritus
+Plants","Detritus
+Plants","Debris
+Benthis algae/seaweed (various names on FB)"
+Arius ,arius,Threadfins,,40,15,0.00589,3.13,,,,1.4-4.4,,3.5,"Nekton
+Zoobenthos","Finfish
+Benthic crustaceans
+Mollusks
+Other benthic inverts","Bony fish - Silver bellies; Stolephorus sp.
+Crabs
+Other mollusks
+Shrimps/prawns
+Other benthic inverts"
+Pseudobalistes,flavimarginatus,Triggerfishes,,60,,0.0257,2.94,,Feb-80,2.2,<1.3,,2.8,"Zoobenthos
+Plants","Echinoderms
+Other plants
+Other benthic inverts","Seastars - Acanthaster planci
+Algae
+Other benthic inverts"
+Tylosurus ,crocodilus,Garfishes,,150,90,0.00093,3.14,51.7,0-13,3.7,1.4-4.4,,4.4,"Zooplankton
+Zooplankton
+Nekton","Finfish
+Fish (early stages)
+Benthic crustaceans","Fish eggs/larvae - Acanthurus sp.
+Bony fish - Anchoa sp.; Cetengraulis edentulus; Harengula humeralis; mugil sp. 
+Shrimps/prawns
+Other fin fish"
+Alectis ,ciliaris,Jacks and trevallies,,150,100,0.02188,2.84,,60-100,,4.5-14,,4,"Zoobenthos
+Detritus
+Nekton
+Zooplankton","Benthic crustaceans
+Detritus
+Cephalopods
+Plankton crustaceans
+Finfish","Shrimps/prawsn - Trachypenaeus
+Debris
+Squids/cuttlefish
+Crabs
+Plankton copepods
+Other benthic crustaceans
+Other plankton crustaceans"
+Atropus ,hedlandensis,Jacks and trevallies,,32,,0.02884,2.92,,-40,,<1.3,,3.8,,,
+Carangoides ,praeustus,Jacks and trevallies,,29,16,0.01445,2.97,,,,<1.3,,3.7,,,
+Caranx,ignobilis,Jacks and trevallies,,170,100,0.01862,2.95,60,10-188,13.7 - check?,1.4-4.4,,4.2,"Nekton
+Zoobenthos","Finfish
+Mollusks
+Cephalopods
+Benthic crustaceans","Bony fish - Brotula multibarbata; Decapterus macarellus; Parupeneus cyclostomus; Eels
+Octopi
+Squids/cuttlefish
+Lobsters"
+Caranx,lugubris,Jacks and trevallies,,100,70,0.01738,2.95,,24-65,9.2,4.5-14,,4.5,"Nekton
+Zooplankton","Finfish
+Plankton crustaceans","Other finfish
+Other benthic crustaceans
+Bony fish"
+Caranx ,sexfasciatus,Jacks and trevallies,,120,60,0.0182,2.95,42,0-146,4.6,1.4-4.4,,4.5,"Zooplankton
+Zoobenthos
+Nekton","Benthic crustaceans
+Fish (early stages)
+Insects
+Finfish
+Sponges
+Worms
+Plankton inverts
+Jellies/hydroids
+","Other benthic crustaceans
+Fish eggs
+Bony fish
+Benthic copepods
+Insects
+Amphipods
+Shrimps/prawns
+Stomatopods
+Gastropods
+Ascidians
+Non-annelids
+Euphausiids
+Jellies/hydroids"
+Caranx ,tille,Jacks and trevallies,,80,50,0.0138,2.99,,30-120,3.8,1.4-4.4,,4.1,"Zoobenthos
+Nekton","Benthic crustaceans
+Finfish
+","Other benthic crustaceans
+Bony fish"
+Decapterus,macarellus,Mackerel scad,,46,30,0.01349,2.99,,40-200,3.9,<1.3,,4,Zooplankton,"Plankton crustaceans
+Other plankton inverts","Other plankton crustaceans
+Other plankton inverts"
+Decapterus ,macrosoma,Mackerel scad,,35,25,0.01047,2.96,16.8,30-70,1.2,<1.3,,3.4,Zooplankton,Other planton inverts,Other planton inverts
+Elagatis ,bipinnulata,Jacks and trevallies,6,180,90,0.01,2.85,64.6,02-Oct,,1.4-4.4,,4.3,"Zoobenthos
+Nekton","Benthic crustaceans
+Plankton crustaceans
+Insects
+Cephalopods
+Finfish
+Sponges/tunicates
+Worms
+Mollusks
+Plankton inverts
+Jellies/hydroids","Other benthic crustaceans
+Bony fish
+Benthic copepods
+Insects - Halobates spp.
+Amphipods
+Squids/cuttelfish
+Gastropods
+Crabs
+Shrimps/prawns
+Stomatopods
+Gastropods
+Polychaetes
+Ascidians
+Euphausiids
+Jellies/hydroids"
+Ferdauia ,ferdau,Jacks and trevallies,,70,30,0.01905,2.95,,0-60,5.2,1.4-4.4,,4.3,"Zoobenthos
+Nekton","Finfish
+Benthic crustaceans
+Other benthic inverts","Bony fish - 	Ammodytoides leptus
+Other benthic crustaceans
+Other benthic inverts"
+Ferdauia ,orthogrammus,Jacks and trevallies,,75,40,0.01349,2.97,,0-168,,1.4-4.4,,4.5,"Nekton
+Zooplankton
+Zoobenthos","Finfish
+Benthic crustaceans
+Plankton crustaceans","Bony fish - Bathygobius fuscus; 	Parupeneus trifasciatus
+Crabs
+Other plankton crustaceans"
+Scomberoides,lysan,Jacks and trevallies,,110,60,0.01259,2.87,,0-100,3.3,1.4-4.4,,4,"Nekton
+Zoobenthos","Finfish
+Plankton crustaceans","Bony fish - Mullet; Nehu
+Other plankton inverts"
+Scomberoides ,tol,Jacks and trevallies,,60,40,0.0085,2.88,26,20-50,1.1,<1.3,,4.1,"Nekton
+Zooplankton
+Zoobenthos","Finfish
+Benthic crustaceans
+Plankton crustaceans
+Cephalopods","Finfish
+Euphausiids
+Stomatopods
+Squids/cuttlefish"
+Seriola ,dumerili,Jacks and trevallies,15,190,100,0.01622,2.92,90.8,18-72,5.5,1.4-4.4,,4.5,"Nekton
+Zooplankton
+Zoobenthos","Finfish
+Cephalopods
+Mollusks
+Worms
+Benthic crustaceans
+Other benthic inverts
+Other plankton inverts","Bony Fish -Boops boops; Engraulis encrasicolus; Merluccius merluccius; Sardina pilchardus
+Squids/cuttlefish
+Benthic copepods
+Benthic amphipods
+Other benthic crustaceans
+Other cephalopods
+Polychaetes"
+Chirocentrus ,dorab,Wolf herring,,100,60,0.00513,2.96,,0-120,,1.4-4.4,,4.4,"Zooplantkon
+Nekton
+Zoobenthos",A lot of diet data - check,A lot of diet data - check
+Chirocentrus ,nudus,Wolf herring,,100,,0.00575,3,,0-150,4.5,1.4-4.4,,4.2,"Nekton
+Zoobenthos","Finfish
+Benthic crustaceans","Bony Fish - Herring; Anchovies
+Crabs"
+Sardinella ,albella,Sardines and Herring,,15,10,0.00437,2.94,9,0-50,,<1.3,,2.6,"Zooplankton
+Plants","Phytoplakton
+Plankton crustaceans
+Other plankton inverts","Diatoms - Chaetoceros spp.; Pleurosigma spp.; Rhizosolenia spp.; Thalassiothrix sp.
+Plankton copepods - 	Euterpina acutifrons; Microsetella rosea
+Dinoflagellates
+Other plankton inverts"
+Platax ,boersii,Batfishes and spadefishes - no Peskas group?,,40,,0.02692,2.94,,Jan-50,,1.4-4.4,,3.5,,,
+Epinephelus,maculatus,Groupers,,60.5,,0.01122,3,,2-100,3.9,1.4-4.4,,4,"Zoobenthos
+Nekton","Benthic crustaceans
+Cephalopods
+Finfish","Other benthic crustaceans
+Squids/cuttlefish
+Bony fish"
+Epinephelus ,radiatus,Groupers,,70,,0.01778,3.11,,18 - 383,,4.5-14,,4,"Zoobenthos
+Nekton","Benthic crustaceans
+Finfish","Other benthic crustaceans
+Bony fish"
+Variola ,albimarginata,Groupers,,65,,0.01349,3.07,,Dec-90,,1.4-4.4,,4.5,Nekton,Finfish,Bony Fish
+Plectorhinchus ,chrysotaenia,Sweetlips,,41,,0.0138,3,,Jun-70,,1.4-4.4,,3.5,,,
+Plectorhinchus ,vittatus,Sweetlips,,72,,0.0138,3,,Feb-25,,4.5-14,,3.9,"Zoobenthos
+Nekton","Benthic crustaceans
+Finfish
+Worms
+Mollusks","Other benthic crustaceans
+Other finfish
+Other mollusks
+Other annelids
+Other benthic inverts"
+Pomadasys ,argenteus,Javelin/Grunt,,70,25,0.0138,2.98,,15-115,,1.4-4.4,,3.5,"Zoobenthos
+Zooplankton","Worms
+Benthic crustaceans
+Plankton crustaceans","Polychaetes
+Shirmps/prawns
+Plankton copepods
+Other benthic crustaceans"
+Pomadasys ,kaakan,Javelin/Grunt,,80,50,0.01413,2.98,,-75,,1.4-4.4,,3.5,"Zoobenthos
+Nekton
+Zooplankton","Benthic crustaceans
+Plankton crustaceans
+Worms
+Finfish","Crabs - Avarus sp. 
+Plankton copepods
+Polychaetes
+Amphipods
+Other benthic crustaceans
+Shrimps/prawns
+Stomatopods
+Mysids
+Plankton copepods
+Bony Fish"
+Neoniphon ,sammara,Soldierfishes,,32,23,0.01585,3,15,0-46,3.9,<1.3,,3.6,"Zoobenthos
+Zooplankton
+Plants
+Nekton","Mollusks
+Plants
+Benthic crustaceans
+Fin fish
+Cnidarians","Gastropods - Cerithium sp
+Crabs - Pachygrapsus plicatus; Thalamita sp.
+Benthic algae/seaweed
+Isopods
+Hard coral
+Plankton copepods
+Bony fish"
+Aurigequula ,fasciata,Ponyfishes,,21,17,0.02138,3.05,,20-50,,<1.3,,3.4,"Zoobenthos
+Nekton
+Zooplankton
+Detritus","Benthic crustaceans
+Other benthic inverts
+Other plankton inverts
+Worms
+Plankton inverts
+Finfish
+Detritus","Benthic copepoda
+Benthic crustaceans
+Polychaetes
+Debris
+Other benthic inverts
+Other plankton inverts
+Bony Fish"
+Gazza ,minuta,Ponyfishes,,21,15,0.01549,3.05,,10-110,,<1.3,,4.2,"Nekton
+Zoobenthos","Finfish
+Other benthic inverts","Finfish
+Other benthic inverts"
+Gymnocranius ,grandoculis,Emperors,,80,64,0.02042,2.88,,20-170,4.8,1.4-4.4,,3.8,"Nekton
+Zoobenthos","Finfish
+Other benthic inverts","Finfish
+Other benthic inverts"
+Lethrinus ,atkinsoni,Emperors,,50,32.5,0.01585,3,,Feb-18,,1.4-4.4,,3.8,"Nekton
+Zoobenthos","Mollusks
+Benthic crustaceans
+Fin fish
+Worms
+Other benthic inverts","Bivalves
+Crabs
+Polychaetes - Errant polychaetes
+Amhipods - Gammaridean amphipods
+Gastropods
+Shrimps/prawns
+Annelids"
+Lethrinus ,erythracanthus,Emperors,,70,50,0.01479,3.01,,15-120,5.5,1.4-4.4,,3.4,Zoobenthos,"Echinoderms
+Mollusks
+Worms
+Other benthic inverts","Other echinoderms
+Other bentic inverts
+Other annelids
+Other mollusks"
+Lethrinus ,obsoletus,Emperors,,60,30,0.01202,2.97,23.7,-30,2.9,4.5-14,,3.9,"Zoobenthos
+Plants
+Zooplankton","Worms
+Benthic crustaceans
+Plankton crustaceans
+Echinoderms
+Mollusks","Polychaetes - Errant polychaetes
+Benthic copepods - Harpacticoid copepods
+Amphipods -Gammarid amphipods
+Mysids
+Benthic algae/weeds - seagrass fronds
+Other benthic crustaceans
+Other echinoderms
+Other mollusks"
+Lethrinus ,reticulatus,Emperors,,40,,0.01514,2.98,,May-30,,1.4-4.4,,3.6,"Zoobenthos
+Nekton","Benthic crustaceans
+Finfish
+Other benthic inverts","Crabs
+Other benthic inverts
+Other finfish"
+Monotaxis, grandoculis,Emperors,,60,40,0.02188,2.95,27.5,May-30,,1.4-4.4,,3.4,Zoobenthos,"Mollusks
+Echinoderms
+Benthic crustaceans
+Worms","Gastropods - Cerithium sp
+bivalves - Clams
+Other echinoderms - Heart urchins
+Seastars/brittlestars
+Crabs
+Polychaetes
+Bivalves"
+Mulloidichthys,vanicolensis,Goatfishes,,39.8,25,0.01023,3.09,24,1-113,,1.4-4.4,,3.6,"Nekton
+Zoobenthos","Finfish
+Benthic crustaceans
+Worms
+Other benthic inverts","Bony fish
+Non-annelids
+Other benthic crustaceans
+Other benthic inverts
+"
+Parupeneus ,heptacanthus,Goatfishes,6,36,25,0.01175,3.1,,-60,,<1.3,,3.4,"Zoobenthos
+Nekton","Benthic crustaceans
+Finfish
+Other benthic inverts","Shrimps/prawns - Penaeus spp.
+Bony fish - Stolephorus spp.
+Other benthic inverts"
+Parupeneus ,indicus,Goatfishes,,45,35,0.01175,3.1,,Oct-30,,1.4-4.4,,3.5,Zoobenthos,Other benthic inverts,Other benthic inverts
+Upeneus ,vittatus,Goatfishes,,28,20,0.00955,3.1,12.8,5-100,,<1.3,,3.6,"Nekton
+Zoobenthos","Finfish
+Other benthic inverts","Finfish
+Other benthic inverts"
+Scolopsis ,lineata,Breams,,25,13,0.01622,2.99,,Jan-20,0.8,<1.3,,3.8,"Nekton
+Zoobenthos","Finfish
+Benthic crustaceans","Other finfish
+Other benthic crustaceans"
+Scolopsis ,vosmeri,Breams,,25,15,0.01514,3.03,,Feb-25,,<1.3,,3.5,Zoobenthos,Other benthic inverts,Other benthic inverts
+Pomacanthus ,annularis,Sergeant,,45,,0.03236,2.89,,Jan-60,,>14,,2.6,"Plants
+Zoobenthos","Other plants
+Sponges/tunicates","Benthic algae/seaweed
+Sponges
+Ascidians"
+Priacanthus ,sagittarius,Moontail bullseye,,35,,0.01698,2.91,,-350,,<1.3,,4.5,Nekton,Finfish,Other finfish
+Pristigenys ,niphonia,Moontail bullseye,,27.4,,0.02239,2.93,,May-30,,<1.3,,4,,,
+Psettodes ,erumei,Flatfishes - No group?,,64,50,0.00676,3.14,38,20-50,,1.4-4.4,,4.4,"Nekton
+Zoobenthos","Finfish
+Cephalopods
+Benthic crustaceans","Bonyfish - Anchoviella; Apogon; eels; Leiognathus; Nemipterus; Saurida; Soles
+Shrimps/prawns
+Squids/cuttlefish
+Crabs"
+Scarus ,quoyi,Parrot fishes,,40,,0.0166,3.12,,Feb-18,,<1.3,,2,Plants ,"Other plants
+Sponges/tunicates",Benthic algae/seaweed 
+Acanthocybium ,solandri,Tuna/Bonito/Other Mackerel,,250,170,0.00282,3.17,99.3,0-12,,1.4-4.4,,4.3,A lot of diet data - check,A lot of diet data - check,A lot of diet data - check
+Katsuwonus ,pelamis,Tuna/Bonito/Other Mackerel,12,110,80,0.01072,3.1,41.3,0-260,2.1,1.4-4.4,,4.4,A lot of diet data - check,A lot of diet data - check,A lot of diet data - check
+Rastrelliger,faughni,Short bodied mackerel,,20,,0.00912,3.04,,2-150,0.8,<1.3,,3.4,Zooplankton,Other plankton inverts,Other plankton inverts
+Rastrelliger ,kanagurta,Short bodied mackerel,4,36,25,0.00871,3.07,21,20-90,1.1,1.4-4.4,,3.2,"Zooplankton
+Detritus
+Plants
+Nekton","Fish (early stages)
+Detritus
+Finfish
+Phytoplankton
+Benthic crustaceans
+Worms
+Other plankton inverts
+Other benthic inverts
+Plankton crustaceans","Fish eggs/larvae - Chanos chanos.
+Bony fish
+Debris
+Diatoms
+Ostracods
+Polychaetes
+Cladocerans"
+Siganus ,fuscescens,Spinefoot,,40,25,0.01288,2.99,5.6,Jan-50,1.3,<1.3,,2,"Detritus
+Plants
+Zoobenthos","Detritus
+Other plants
+Phytoplankton
+Other benthic inverts
+","Debris
+Benthic algae - red algal fronds; Enhalus; filamentous algae
+Blue-green algae - Lyngbya majuscula
+Other benthic inverts -foraminiferans"
+Siganus ,spinus,Spinefoot,,28,18,0.0195,3.01,,Jan-20,0.5,<1.3,,2,A lot of diet data - check,A lot of diet data - check,A lot of diet data - check
+Sphyrna, lewini,Sharks,35,430,360,0.00355,3.1,210.5,0-25,13.7,4.5-14,,4.1,A lot of diet data - check,A lot of diet data - check,A lot of diet data - check
+Carcharhinus ,falciformis,Sharks,25,350,250,0.00468,3.08,219.1,0-500,9.2,4.5-14,,4.5,A lot of diet data - check,A lot of diet data - check,A lot of diet data - check
+Hemitrygon, parvonigra,Stingrays,,51,,0.00646,3.06,,60-185,,,,3.7,,,
+Centrophorus,moluccensis,Sharks,,100,,0.00263,3.18,,125-823,,>14,,4.3,"Nekton
+Zoobenthos","Finfish
+Cephalopods
+Benthic crustaceans
+Mollusks
+Sponges/tunicates","Other finfish - dogfish
+Cephalopods
+Bony fish
+Octopi
+Shrimps/prawns
+Ascidians"
+Rhina ,ancylostoma,Wedgefishes,,300,,0.00372,3.11,164,Mar-90,,>14,,3.6,Zoobenthos,"Benthic crustaceans
+Mollusks","Other benthic crustaceans
+Other mollusks"
+"Acanthurus	", xanthopterus,Surgeonfishes,29,70,50,0.01413,3,,May-90,3.8,4.5-14,,2.9,"Plants
+Zoobenthos
+Detritus
+Zooplankton","Other plants
+Phytoplankton
+Cnidarians
+Detritus
+Benthic crustaceans
+Other benthic inverts
+Worms
+Mollusks","Benthic algae/seaweed
+Hard coral
+Debris
+Diatoms
+Polyps
+Other benthic inverts
+Non-annelids
+Other mollusks
+Other plankton inverts"
+Trachinotus ,blochii,Jacks and trevallies,,110,40,0.02692,2.81,,01-Jul,,1.4-4.4,,3.8,"Zoobenthos
+Zooplankton","Mollusks
+Benthic crustaceans
+Other benthic inverts
+Other plankton inverts","Bivalves
+Octopi
+Other benthic inverts
+Other plankton inverts
+Other benthic inverts"
