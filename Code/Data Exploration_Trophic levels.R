@@ -13,7 +13,7 @@ Subset_Data_Name<-subset(Data, Variable_Name_Keep=="Term you want to keep")
 #Check different groups and TL ranges for each
 
 TL_Check<-ggplot(Timor_Fish, aes(Trophic_Level, Peskas_Group))+
-  geom_boxplot(position=position_dodge(0.9), color="Sea Green")+
+  geom_boxplot(position=position_dodge(0.9), color="Sea Green")+geom_jitter(colour="lightblue")+
   labs(y = "Peskas Groups")+
   theme(legend.title = element_blank(),legend.text = element_text(size=11, face="italic"),panel.background = element_blank(),panel.grid.major=element_line(0.5, colour="Gray80"),
         axis.text.x = element_text(size=11, vjust=0.3),axis.title.x=element_blank(),
