@@ -872,5 +872,101 @@ Jellyfish/hydroids","Benthic algae/seaweed - Cymodocea sp.; Sargassum natans
 Other finfish
 Other phytoplankton
 Jelly/fishydroids"
-Gerres ,subfasciatus,Gerres  subfasciatus,Siler belly roach_Peskas group?,Yes,,20,,0.01479,3.05,,Mar-40,,<1.3,,3.3,,,
+Gerres ,subfasciatus,Gerres  subfasciatus,Silwer belly roach_Peskas group?,Yes,,20,,0.01479,3.05,,Mar-40,,<1.3,,3.3,,,
 Sphyraena,barracuda,Sphyraena barracuda,Barracuda_Peskas group?,No,18,200,140,0.00851,2.93,66,Mar-30,,4.5-14,,4.5,A lot of diet data - check,A lot of diet data - check,A lot of diet data - check
+Sphyraena ,qenie,Sphyraena  qenie,Barracuda_Peskas group?,No,,170,80,0.00724,2.92,,0-100,,14,,4.5,Nekton,Finfish,"Bony Fish - 	Encrasicholina devisi; 	Herklotsichthys spp.; Stolephorus spp."
+Caesio,caerulaurea,Caesio caerulaurea,Fusilier,No,,45.4,25,0.01349,3.06,,1-60,,1.4-4.4,,3.4,Zooplankton,Other inverts,Other inverts
+Caesio,cuning,Caesio cuning,Fusilier,No,,60,,0.01585,3.08,,1-60,,1.4-4.4,,3.4,Zooplankton,Other inverts,Other inverts
+Caesio,xanthonota,Caesio xanthonota,Fusilier,No,,40,,0.01259,3.09,,0-50,,<1.3,,3.4,Zooplankton,Other inverts,Other inverts
+Cromileptes ,altivelis,Cromileptes  altivelis,Groupers,No,,70,,0.01349,3.12,,5-25,3.7,1.4-4.4,,4.5,Nekton,Finfish,Bony fish  
+Epinephelus,bleekeri,Epinephelus bleekeri,Groupers,Yes,,75,,0.01259,3.06,36,30-105,8.8,4.5-14,,3.9,,,
+Epinephelus,macrospilos,Epinephelus macrospilos,Groupers,No,,51,,0.01072,3.05,,3-44,,1.4-4.4,,3.8,"Zoobenthos
+Nekton","Worms
+Benthic crustaceans
+Finfish
+Mollusks
+Cephalopods","Polycheates
+Bony fish
+Crabs
+Octopi
+Squids/cuttlefish"
+Epinephelus,melanostigma,Epinephelus melanostigma,Groupers,No,,54.9,25,0.01148,3.05,,0-30,,1.4-4.4,,4,"Zoobenthos
+Nekton","Benthic crustaceans
+Finfish","Other benthic crustaceans
+Bony fish"
+Epinephelus,polyphekadion,Epinephelus polyphekadion,Groupers,No,,90,90,0.01202,3.04,,0-50,,4.5-14,,4,"Zoobenthos
+Nekton","Cephalopod
+Finfish
+Benthic crustaceans","Squids/cuttlefish
+Other bony fish
+Crabs
+Lobsters
+Gastropods
+Other benthic crustaceans
+Bony fish"
+Plectropomus,areolatus,Plectropomus areolatus,Groupers,No,,80,,0.01148,3.04,36.6,1-20,,1.4-4.4,,4.5,Nekton,Finfish,"Bony fish - 	Holocentrus sp."
+Plectropomus,laevis,Plectropomus laevis,Groupers,No,,125,84,0.01,3.07,,4-100,,1.4-4.4,,4.1,"Zoobenthos
+Nekton","Cephalopod
+Finfish
+Benthic crustaceans","Squids/cuttlefish
+Bony fish
+Other benthic crustaceans"
+Plectropomus,leopardus,Plectropomus leopardus,Groupers,No,26,120,35,0.01202,3.04,37.3,3-100,,1.4-4.4,,4.4,A lot of diet data - check,A lot of diet data - check,A lot of diet data - check
+Plectropomus,maculatus,Plectropomus maculatus,Groupers,No,,125,,0.01122,3.05,,5-100,,1.4-4.4,,4.1,"Zoobenthos
+Nekton","Cephalopod
+Finfish
+Benthic crustaceans","Squids/cuttlefish
+Bony fish
+Other benthic crustaceans"
+Plectropomus,oligocanthus,Plectropomus oligocanthus,Groupers,No,,75,,0.01023,3.03,,5-147,,4.5-14,,4,"Zoobenthos
+Nekton","Finfish
+Benthic crustaceans","Bony fish
+Other benthic crustaceans"
+Variola ,louti,Variola  louti,Groupers,No,,83,75,0.01096,3.03,47.6,3-300,6.1,1.4-4.4,,4.3,"Zoobenthos
+Nekton","Benthic crustaceans
+Finfish","Crabs
+Bony fish - Naso spp. "
+Siganus ,canaliculatus,Siganus  canaliculatus,Spinefoot,Yes,,40,20,0.01445,2.98,11.6,1-50,0.7,1.4-4.4,,2.8,A lot of diet data - check,A lot of diet data - check,A lot of diet data - check
+Siganus ,javus,Siganus  javus,Spinefoot,Yes,,53,30,0.01445,3.06,,0-20,,1.4-4.4,,2.4,"Detritus
+Plants
+Zooplankton","Detritus
+Other plants
+Phytoplankton
+Plank crustaceans
+Jellyfish/hydroids","Debris
+Benthic algae
+Blue-green algae
+Diatoms
+Jellyfish/hydroids"
+Siganus ,puellus,Siganus  puellus,Spinefoot,No,,38,25,0.0123,2.98,,2-30,,<1.3,,3,Zoobenthos,Sponges/tunicates,"Ascidians
+Sponges"
+Siganus ,vermiculatus,Siganus  vermiculatus,Spinefoot,Yes,,45,30,0.0123,3.13,,0-15,,1.4-4.4,,2,Plants,"Other plants
+Phytoplanton
+Finfish
+Other plankton inverts
+Jellyfish/hydroids",Benthic algae/seaweed  
+Siganus ,virgatus,Siganus  virgatus,Spinefoot,No,,30,20,0.01905,3.13,,1-20,,<1.3,,2.7,"Plants
+Zooplankton","Other plants 
+Other plank inverts","Benthic algae/seaweed
+Other plank inverts"
+Megalops ,cyprinoides,Megalops  cyprinoides,Tarpon?,Yes,44,150,30,0.00741,3.07,,50-,,1.4-4.4,,3.5,"Zoobenthos
+Nekton","Finfish
+Benthic crustaceans
+Other terrestrial inverts","Bony fish - Chanos chanos
+Terrestrial insects
+Shrimps/prawns
+Other benthic inverts
+Other benthic crustaceans"
+Gnathodon ,speciosus,Gnathodon  speciosus,Jacks and trevallies,No,,120,75,0.01349,2.96,32.5,0-80,,1.4-4.4,,4,"Zoobenthos
+Nekton","Mollusks
+Benthic crustaceans
+Finfish","Other mollusks
+Other benthic inverts
+Other finfish"
+Euthynnus ,affinis,Euthynnus  affinis,Tuna/Bonito/Other Mackerel,No,6,100,60,0.01,3.05,42.3,0-200,1.9,1.4-4.4,,4.5,A lot of diet data - check,A lot of diet data - check,A lot of diet data - check
+Lethrinus ,amboinensis,Lethrinus  amboinensis,Emperors,No,,70,40,0.00457,3.1,,5-30,,1.4-4.4,,4,"Zoobenthos
+Nekton","Finfish
+Benthic crustaceans","Other finfish
+Other benthic crustaceans"
+Lethrinus ,harak,Lethrinus  harak,Emperors,No,15,59.4,30,0.01514,2.98,19.5,0-20,,1.4-4.4,,3.6,A lot of diet data - check,A lot of diet data - check,A lot of diet data - check
+Lethrinus,lentjan,Lethrinus lentjan,Emperors,Yes,19,52,40,0.01514,2.97,24.1,10-90,,1.4-4.4,,3.9,A lot of diet data - check,A lot of diet data - check,A lot of diet data - check
