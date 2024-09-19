@@ -13,3 +13,4 @@ SUA_Total<-ggplot(SAU_Catch, aes(factor(year), tonnes))+
         axis.text.x = element_text(size=11, angle=90, vjust=0.3),axis.title.x=element_blank(),
         axis.text.y= element_text(size=11), axis.title.y= element_text(size=11))
 SUA_Total
+
