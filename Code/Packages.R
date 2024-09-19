@@ -12,3 +12,4 @@ library(RColorBrewer)
 
 library(plyr)
 library(Rmisc)
+library(rmarkdown)
