@@ -14,8 +14,7 @@ test
 
 
 Test1<-ggplot(test, aes(Site, Density_m2,))+
-  geom_boxplot(position=position_dodge(0.9), color="Sea Green")+geom_jitter(colour="lightblue")+
-  stat_summary(fun.y = "mean", colour="darkblue", size = 1, shape="diamond")+
+  geom_jitter(colour="darkblue", size=5)+
   labs(y = "Snapper density (m2)")+
   theme(legend.title = element_blank(),legend.text = element_text(size=13, face="italic"),panel.background = element_blank(),panel.grid.major=element_line(0.5, colour="Gray80"),
         axis.text.x = element_text(size=13, vjust=0.3),axis.title.x=element_blank(),
