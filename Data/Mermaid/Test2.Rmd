@@ -1,0 +1,22 @@
+```{R Testing a simple chunk}
+
+5+5
+10*2 
+
+```
+
+```{R Another chunk test}
+# Create some random data
+x <- rnorm(50, mean = 10, sd = 2)  # 50 random numbers
+y <- rnorm(50, mean = 20, sd = 3)  # 50 more random numbers
+
+# Make a basic plot
+plot(x, y,
+     col = "purple",          # Point color
+     pch = 16,               # Solid circle points
+     main = "My First Plot", # Title
+     xlab = "X values",      # X-axis label
+     ylab = "Y values")      # Y-axis label
+
+```
+
