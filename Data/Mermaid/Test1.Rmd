@@ -1,0 +1,70 @@
+---
+title: "Reef Food Web"
+output: html_document
+---
+install.packages("rmarkdown")
+install.packages("DiagrammeR")
+
+```{r}
+library(DiagrammeR)
+
+mermaid("
+    graph BT
+    %% Define the graph direction (Bottom-Up)
+
+    %% Define all nodes with descriptive labels
+    %% Primary Producers (Green)
+    A[Phytoplankton]
+    B[Benthic Algae]
+    C[Zooxanthellae]
+    
+    %% Primary Consumers (Yellow)
+    D[Zooplankton]
+    E[Parrotfish]
+    F[Damselfish]
+    G[Coral Polyps]
+    
+    %% Secondary Consumers (Orange)
+    H[Butterflyfish]
+    I[Wrasse]
+    J[Angelfish]
+    
+    %% Top Predators (Red)
+    K[Grouper]
+    L[Reef Shark]
+
+    %% Define relationships (who eats whom)
+    %% Primary Producer relationships
+    A --> D
+    A --> G
+    B --> E
+    B --> F
+    C --> G
+
+    %% Primary Consumer relationships
+    D --> H
+    D --> I
+    E --> I
+    F --> H
+    G --> H
+
+    %% Secondary Consumer relationships
+    H --> K
+    I --> K
+    J --> K
+    
+    %% Top Predator relationships
+    K --> L
+
+    %% Style definitions
+    classDef producer fill:#90EE90,stroke:#333,stroke-width:2px;
+    classDef consumer1 fill:#FFE4B5,stroke:#333,stroke-width:2px;
+    classDef consumer2 fill:#FFA07A,stroke:#333,stroke-width:2px;
+    classDef predator fill:#FF6347,stroke:#333,stroke-width:2px;
+
+    %% Apply styles to nodes
+    class A,B,C producer;
+    class D,E,F,G consumer1;
+    class H,I,J consumer2;
+    class K,L predator;
+")
