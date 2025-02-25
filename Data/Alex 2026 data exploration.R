@@ -194,3 +194,45 @@ lutjanidae_maturity <- data.frame(
 lutjanidae_with_maturity <- lutjanidae_adarai %>%
   left_join(lutjanidae_maturity, by = "Scientific_name")
 
+# Add source information to the plot
+lutjanidae_with_maturity %>%
+  group_by(Scientific_name) %>%
+  mutate(
+    n_count = n(),
+    avg_length = mean(Length, na.rm = TRUE)
+  ) %>%
+  ungroup() %>%
+  ggplot(aes(x = Length)) +
+  geom_histogram(bins = 15, alpha = 0.7, fill = "steelblue") +
+  # Add mean line
+  geom_vline(aes(xintercept = avg_length), linetype = "dashed", color = "red") +
+  # Add maturity line
+  geom_vline(aes(xintercept = L50), linetype = "solid", color = "darkgreen", linewidth = 0.8) +
+  # Add counts and lengths info with source
+  geom_text(
+    data = . %>% 
+      group_by(Scientific_name) %>%
+      summarize(
+        n_count = n(),
+        avg_length = mean(Length, na.rm = TRUE),
+        L50 = first(L50),
+        source = first(source),
+        .groups = "drop"
+      ),
+    aes(x = Inf, y = Inf, 
+        label = paste0("n=", n_count, 
+                       "\nMean=", round(avg_length, 1), "cm",
+                       "\nL₅₀=", L50, "cm",
+                       "\n(", source, ")")),
+    hjust = 1, vjust = 1, size = 3
+  ) +
+  facet_wrap(~Scientific_name, scales = "free_y") +
+  theme_minimal() +
+  theme(
+    strip.text = element_text(face = "italic"),
+    plot.title = element_text(face = "bold")
+  ) +
+  labs(title = "Length Distribution of Lutjanidae Species at Adarai",
+       subtitle = "Red dashed line = mean length; Green solid line = length at first maturity (L₅₀)",
+       x = "Length (cm)",
+       y = "Count")
