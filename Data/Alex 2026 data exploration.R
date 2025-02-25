@@ -236,3 +236,150 @@ lutjanidae_with_maturity %>%
        subtitle = "Red dashed line = mean length; Green solid line = length at first maturity (L₅₀)",
        x = "Length (cm)",
        y = "Count")
+
+###############################################################################
+#Looking at the contribution of different snapper species to the larger group
+
+# Filter data for Lutjanidae at Adarai
+lutjanidae_adarai <- timor_data %>%
+  filter(Location == "Adarai", Family == "Lutjanidae")
+
+# Analyze species contribution by abundance (count)
+abundance_contribution <- lutjanidae_adarai %>%
+  group_by(Scientific_name) %>%
+  summarize(
+    count = n(),
+    proportion = n() / nrow(lutjanidae_adarai) * 100
+  ) %>%
+  arrange(desc(count))
+
+# Print abundance contribution
+print("Species contribution by abundance:")
+print(abundance_contribution)
+
+# Visualization 1: Abundance contribution bar plot
+ggplot(abundance_contribution, 
+       aes(x = reorder(Scientific_name, proportion), y = proportion)) +
+  geom_col(fill = "steelblue") +
+  coord_flip() +
+  geom_text(aes(label = paste0(round(proportion, 1), "%")), 
+            hjust = -0.2, size = 3) +
+  theme_minimal() +
+  theme(
+    axis.text.y = element_text(face = "italic"),
+    plot.title = element_text(face = "bold")
+  ) +
+  labs(title = "Lutjanidae Species Contribution by Abundance at Adarai",
+       x = NULL,
+       y = "Percentage of Total Count (%)")
+
+
+# Analyze species contribution by biomass
+biomass_contribution <- lutjanidae_adarai %>%
+  group_by(Scientific_name) %>%
+  summarize(
+    total_biomass_kg = sum(Biomass_kg, na.rm = TRUE),
+    proportion = sum(Biomass_kg, na.rm = TRUE) / sum(lutjanidae_adarai$Biomass_kg, na.rm = TRUE) * 100
+  ) %>%
+  arrange(desc(total_biomass_kg))
+
+# Print biomass contribution
+print("Species contribution by biomass:")
+print(biomass_contribution)
+
+# Visualization 2: Biomass contribution bar plot
+ggplot(biomass_contribution, 
+       aes(x = reorder(Scientific_name, proportion), y = proportion)) +
+  geom_col(fill = "darkgreen") +
+  coord_flip() +
+  geom_text(aes(label = paste0(round(proportion, 1), "%")), 
+            hjust = -0.2, size = 3) +
+  theme_minimal() +
+  theme(
+    axis.text.y = element_text(face = "italic"),
+    plot.title = element_text(face = "bold")
+  ) +
+  labs(title = "Lutjanidae Species Contribution by Biomass at Adarai",
+       x = NULL,
+       y = "Percentage of Total Biomass (%)")
+
+# Visualization 3: Combined stacked bar chart
+# Prepare data for stacked bar
+contribution_data <- lutjanidae_adarai %>%
+  group_by(Scientific_name) %>%
+  summarize(
+    count = n(),
+    count_percent = n() / nrow(lutjanidae_adarai) * 100,
+    biomass = sum(Biomass_kg, na.rm = TRUE),
+    biomass_percent = sum(Biomass_kg, na.rm = TRUE) / sum(lutjanidae_adarai$Biomass_kg, na.rm = TRUE) * 100
+  ) %>%
+  arrange(desc(count)) %>%
+  # Create shorter names for display
+  mutate(
+    short_name = sub("Lutjanus ", "L. ", Scientific_name)
+  )
+
+# Convert to long format for plotting
+contribution_long <- contribution_data %>%
+  select(short_name, count_percent, biomass_percent) %>%
+  pivot_longer(
+    cols = c(count_percent, biomass_percent),
+    names_to = "metric",
+    values_to = "percentage"
+  ) %>%
+  mutate(
+    metric = case_when(
+      metric == "count_percent" ~ "By Abundance",
+      metric == "biomass_percent" ~ "By Biomass",
+      TRUE ~ metric
+    )
+  )
+
+# Create stacked bar chart
+ggplot(contribution_long, aes(x = metric, y = percentage, fill = reorder(short_name, -percentage))) +
+  geom_col() +
+  geom_text(
+    data = contribution_long %>% 
+      group_by(short_name, metric) %>% 
+      filter(percentage >= 5), # Only label segments > 5% for clarity
+    aes(label = paste0(round(percentage, 1), "%")),
+    position = position_stack(vjust = 0.5),
+    size = 3
+  ) +
+  theme_minimal() +
+  scale_fill_brewer(palette = "Set3") +
+  labs(
+    title = "Contribution of Lutjanidae Species at Adarai",
+    x = NULL,
+    y = "Percentage (%)",
+    fill = "Species"
+  ) +
+  theme(
+    legend.position = "right",
+    legend.title = element_text(face = "bold"),
+    legend.text = element_text(face = "italic"),
+    axis.text.x = element_text(face = "bold")
+  )
+
+install.packages("ggrepel") 
+library(ggrepel)
+
+# Scatter plot comparing abundance vs biomass contribution
+ggplot(contribution_data, aes(x = count_percent, y = biomass_percent)) +
+  geom_point(aes(size = biomass), color = "darkblue", alpha = 0.7) +
+  geom_text_repel(
+    aes(label = short_name),
+    fontface = "italic",
+    size = 3,
+    box.padding = 0.5,
+    point.padding = 0.5
+  ) +
+  geom_abline(linetype = "dashed", color = "gray50") +
+  theme_minimal() +
+  labs(
+    title = "Lutjanidae Species: Abundance vs. Biomass Contribution",
+    subtitle = "Points above line contribute more biomass than their numerical abundance would suggest",
+    x = "Contribution by Abundance (%)",
+    y = "Contribution by Biomass (%)",
+    size = "Total Biomass (kg)"
+  )
