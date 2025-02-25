@@ -383,3 +383,31 @@ ggplot(contribution_data, aes(x = count_percent, y = biomass_percent)) +
     y = "Contribution by Biomass (%)",
     size = "Total Biomass (kg)"
   )
+
+# Calculate weighted average biomass based on biomass contribution
+biomass_weighted_avg <- lutjanidae_adarai %>%
+  # Group by species
+  group_by(Scientific_name) %>%
+  summarize(
+    # Total biomass for each species
+    species_total_biomass = sum(Biomass_kg, na.rm = TRUE),
+    # Count of individuals
+    count = n(),
+    # Average biomass per individual for the species
+    species_avg_biomass = mean(Biomass_kg, na.rm = TRUE)
+  ) %>%
+  # Calculate biomass proportion
+  mutate(
+    # What fraction of total biomass comes from this species
+    biomass_proportion = species_total_biomass / sum(species_total_biomass),
+    # Weighted contribution using biomass proportion
+    weighted_contribution = species_avg_biomass * biomass_proportion
+  ) %>%
+  ungroup()
+
+# Calculate the biomass-weighted average
+overall_biomass_weighted_avg <- sum(biomass_weighted_avg$weighted_contribution)
+
+# Print results
+print(biomass_weighted_avg)
+print(paste0("Biomass-weighted average: ", round(overall_biomass_weighted_avg, 4), " kg"))
