@@ -23,7 +23,8 @@ TL_Check
 #Check Snappers and seaperches only
 Snappers<-subset(Timor_Fish, Peskas_Group=="Snappers and seaperches")
 
-Snappers_TL<-ggplot(Snappers, aes(Trophic_Level,Binomial, color=Estuarine_Connection))+
+#Check for range in TL and connection with the estuary
+Snappers_TL<-ggplot(Snappers, aes(Trophic_Level,Binomial, color=Estuarine_connection))+
   geom_jitter(position=position_dodge(0.9), size=3)+
   labs(y = "Species")+
   ggtitle("Snappers and seaperches trophic levels")+
@@ -31,6 +32,27 @@ Snappers_TL<-ggplot(Snappers, aes(Trophic_Level,Binomial, color=Estuarine_Connec
         axis.text.x = element_text(size=11),axis.title.x=element_blank(),
         axis.text.y= element_text(size=11, face="italic"), axis.title.y= element_text(size=11))
 Snappers_TL
+
+#Check for range in length and connection with the estuary
+Snappers_Length<-ggplot(Snappers, aes(Common_length_cm,Binomial, color=Estuarine_connection))+
+  geom_jitter(position=position_dodge(0.9), size=3)+
+  labs(y = "Species")+
+  ggtitle("Snappers and seaperches common length (cm)")+
+  theme(legend.title = element_text(),legend.text = element_text(size=11, face="italic"),panel.background = element_blank(),panel.grid.major=element_line(0.5, colour="Gray80"),
+        axis.text.x = element_text(size=11),axis.title.x=element_blank(),
+        axis.text.y= element_text(size=11, face="italic"), axis.title.y= element_text(size=11))
+Snappers_Length
+
+
+#Check for range in depth and connection with the estuary
+Snappers_Depth<-ggplot(Snappers, aes(Common_depth_range_m,Binomial, color=Estuarine_connection))+
+  geom_jitter(position=position_dodge(0.9), size=3)+
+  labs(y = "Species")+
+  ggtitle("Snappers and seaperches Common depth range (m)")+
+  theme(legend.title = element_text(),legend.text = element_text(size=11, face="italic"),panel.background = element_blank(),panel.grid.major=element_line(0.5, colour="Gray80"),
+        axis.text.x = element_text(size=11, angle=90),axis.title.x=element_blank(),
+        axis.text.y= element_text(size=11, face="italic"), axis.title.y= element_text(size=11))
+Snappers_Depth
 
 
 #Plot the different species versus Food 1
