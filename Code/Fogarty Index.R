@@ -29,7 +29,7 @@ estimate_primary_production <- function(chla) {
 }
 
 # Calculate primary production
-chla_data$primary_production <- estimate_primary_production(chla_data$Chla)
+chla_data$primary_production <- estimate_primary_production(chla_data$chla)
 names(chla_data)
 
 # Create a visualization with both time series
@@ -148,7 +148,7 @@ ggplot(fogarty_data, aes(x = log_pp, y = log_catch)) +
 # Create monthly data for lag analysis
 monthly_chla <- chla_data %>%
   group_by(year, month) %>%
-  summarize(monthly_chla = mean(Chla, na.rm = TRUE),
+  summarize(monthly_chla = mean(chla, na.rm = TRUE),
             monthly_pp = mean(primary_production, na.rm = TRUE))
 
 monthly_catch <- catch_data %>%
@@ -417,7 +417,7 @@ monthly_data %>%
        y = "Year") +
   theme_minimal()
 
-##Seanal modeling - Fogarty Index##
+##Seasonal modeling - Fogarty Index##
 
 # Prepare monthly data with seasonal indicators
 monthly_fogarty <- monthly_data %>%
@@ -501,3 +501,57 @@ upwelling_season_model <- lm(log_catch ~ log_pp * upwelling_season + season,
 
 # Check the model summary
 summary(upwelling_season_model)
+
+
+###Fogarty Ratio as per FAO Toolbox###
+
+# First check if primary_production exists, if not create it
+if(!"primary_production" %in% names(chla_data)) {
+  # Use the conversion factor to calculate primary production
+  conversion_factor <- 65  # Based on Timor-Leste specific factor
+  chla_data$primary_production <- chla_data$Chla * conversion_factor
+}
+
+# Check the data type and convert if needed
+chla_data$primary_production <- as.numeric(chla_data$primary_production)
+
+# Check for any NA values that might have been introduced
+cat("NA values in primary_production:", sum(is.na(chla_data$primary_production)), "\n")
+
+# Calculate total primary production
+total_pp <- mean(chla_data$primary_production, na.rm=TRUE)  # in gC/m²/yr
+cat("Mean primary production:", total_pp, "gC/m²/yr\n")
+
+# Convert from gC/m² to tons C/km²
+total_pp_t_km2 <- total_pp * 10  # convert from gC/m² to t/km²
+cat("Mean primary production:", total_pp_t_km2, "t/km²/yr\n")
+
+
+# Define the study area in square kilometers
+area_km2 <- 20000  # Replace with your actual study area size
+
+# Calculate total catch 
+total_catch_kg <- sum(catch_data$catch_kg, na.rm=TRUE)
+cat("Total catch:", total_catch_kg, "kg\n")
+
+# Calculate total catch per unit area and convert to tons
+total_catch_t_km2 <- (total_catch_kg / 1000) / area_km2  # Convert kg to tons, then divide by area
+cat("Total catch per area:", total_catch_t_km2, "t/km²/yr\n")
+
+# Calculate average primary production
+total_pp_gC_m2 <- mean(chla_data$primary_production, na.rm=TRUE)  # in gC/m²/yr
+cat("Mean primary production:", total_pp_gC_m2, "gC/m²/yr\n")
+
+# Convert from gC/m² to tons C/km²
+# 1 gC/m² = 0.001 tC/km² (because 1 km² = 1,000,000 m² and 1 t = 1,000,000 g)
+total_pp_t_km2 <- total_pp_gC_m2 * 1  # This is the correct conversion factor
+cat("Mean primary production:", total_pp_t_km2, "tC/km²/yr\n")
+
+# Calculate the ratio
+ecological_efficiency <- total_catch_t_km2 / total_pp_t_km2
+
+# Print result
+cat("Ecological efficiency (catch:primary production):", 
+    round(ecological_efficiency, 6), "or approximately 1:",
+    round(1/ecological_efficiency))
+
