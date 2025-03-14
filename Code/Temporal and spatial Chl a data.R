@@ -1387,6 +1387,939 @@ cat("- Long-term trends should be interpreted alongside environmental changes\n"
 cat("- SARIMA models account for both trend and seasonality, but don't explain 'why'\n")
 cat("- Consider climatic factors (ENSO, monsoons) that may affect inter-annual variability\n")
 
+# Load necessary packages
+library(forecast)  # For STL decomposition
+library(ggplot2)   # For plotting
+library(dplyr)     # For data manipulation
+library(lubridate) # For date handling
+library(cowplot)   # For arranging multiple plots (install if needed)
+
+#=========================================
+# 1. PREPARE TIME SERIES FOR DECOMPOSITION
+#=========================================
+
+# Ensure data is in proper time series format
+# Assuming your time series objects are already created as north_ts and south_ts
+# If not, you need to create them first (similar to the SARIMA code)
+
+# Check if the time series objects exist
+if (!exists("north_ts") || !exists("south_ts")) {
+  # Code to create the time series objects
+  # Similar to what was in the SARIMA code
+  cat("Creating time series objects first...\n")
+  
+  # Sort data by date
+  north_data <- north_data %>% arrange(date_clean)
+  south_data <- south_data %>% arrange(date_clean)
+  
+  # Create monthly averages if needed
+  north_monthly <- north_data %>%
+    mutate(year = year(date_clean),
+           month = month(date_clean),
+           yearmonth = paste(year, sprintf("%02d", month), sep="-")) %>%
+    group_by(yearmonth, year, month) %>%
+    summarize(chla = mean(chla, na.rm = TRUE), .groups = "drop") %>%
+    arrange(yearmonth)
+  
+  south_monthly <- south_data %>%
+    mutate(year = year(date_clean),
+           month = month(date_clean),
+           yearmonth = paste(year, sprintf("%02d", month), sep="-")) %>%
+    group_by(yearmonth, year, month) %>%
+    summarize(chla = mean(chla, na.rm = TRUE), .groups = "drop") %>%
+    arrange(yearmonth)
+  
+  # Create time series objects
+  north_ts <- ts(north_monthly$chla, frequency = 12, 
+                 start = c(min(north_monthly$year), min(north_monthly$month[north_monthly$year == min(north_monthly$year)])))
+  
+  south_ts <- ts(south_monthly$chla, frequency = 12,
+                 start = c(min(south_monthly$year), min(south_monthly$month[south_monthly$year == min(south_monthly$year)])))
+}
+
+# Print basic information about the time series
+cat("\n==== TIME SERIES INFORMATION ====\n")
+cat("North Coast Time Series:\n")
+cat("Length:", length(north_ts), "observations\n")
+cat("Frequency:", frequency(north_ts), "(12 = monthly data)\n")
+cat("Start:", start(north_ts)[1], "Year", start(north_ts)[2], "Month\n")
+cat("End:", end(north_ts)[1], "Year", end(north_ts)[2], "Month\n\n")
+
+cat("South Coast Time Series:\n")
+cat("Length:", length(south_ts), "observations\n")
+cat("Frequency:", frequency(south_ts), "(12 = monthly data)\n")
+cat("Start:", start(south_ts)[1], "Year", start(south_ts)[2], "Month\n")
+cat("End:", end(south_ts)[1], "Year", end(south_ts)[2], "Month\n\n")
+
+#=========================================
+# 2. PERFORM STL DECOMPOSITION
+#=========================================
+
+# STL decomposition parameters
+# s.window: Controls seasonal component extraction
+#   - "periodic" assumes constant seasonality
+#   - A number (e.g., 13) allows seasonality to change over time
+# t.window: Controls trend component smoothness (larger = smoother)
+# robust: TRUE helps handle outliers better
+
+# North Coast decomposition
+north_stl <- stl(north_ts, 
+                 s.window = "periodic",  # Fixed seasonal pattern
+                 t.window = 13,          # Moderate trend smoothing
+                 robust = TRUE)          # Robust to outliers
+
+# South Coast decomposition
+south_stl <- stl(south_ts, 
+                 s.window = "periodic",
+                 t.window = 13,
+                 robust = TRUE)
+
+# Extract components
+north_seasonal <- north_stl$time.series[, "seasonal"]
+north_trend <- north_stl$time.series[, "trend"]
+north_remainder <- north_stl$time.series[, "remainder"]
+
+south_seasonal <- south_stl$time.series[, "seasonal"]
+south_trend <- south_stl$time.series[, "trend"]
+south_remainder <- south_stl$time.series[, "remainder"]
+
+#=========================================
+# 3. VISUALIZE DECOMPOSITION
+#=========================================
+
+# Basic R plots of the decomposition
+par(mfrow = c(1, 2))
+plot(north_stl, main = "North Coast STL Decomposition")
+plot(south_stl, main = "South Coast STL Decomposition")
+
+# Create more customized ggplot visualizations
+# First, convert to data frames for ggplot
+north_stl_df <- data.frame(
+  date = as.Date(time(north_ts), origin = "1970-01-01"),
+  observed = as.numeric(north_ts),
+  trend = as.numeric(north_trend),
+  seasonal = as.numeric(north_seasonal),
+  remainder = as.numeric(north_remainder)
+)
+
+south_stl_df <- data.frame(
+  date = as.Date(time(south_ts), origin = "1970-01-01"),
+  observed = as.numeric(south_ts),
+  trend = as.numeric(south_trend),
+  seasonal = as.numeric(south_seasonal),
+  remainder = as.numeric(south_remainder)
+)
+
+# Function to create a complete decomposition plot
+create_stl_plot <- function(stl_df, location, color) {
+  # Observed data plot
+  p1 <- ggplot(stl_df, aes(x = date, y = observed)) +
+    geom_line(color = color, size = 0.8) +
+    labs(title = paste(location, "Chlorophyll-a"), y = "Observed") +
+    theme_minimal() +
+    theme(axis.title.x = element_blank())
+  
+  # Trend component plot
+  p2 <- ggplot(stl_df, aes(x = date, y = trend)) +
+    geom_line(color = color, size = 1) +
+    labs(y = "Trend") +
+    theme_minimal() +
+    theme(axis.title.x = element_blank())
+  
+  # Seasonal component plot
+  p3 <- ggplot(stl_df, aes(x = date, y = seasonal)) +
+    geom_line(color = color, size = 0.8) +
+    labs(y = "Seasonal") +
+    theme_minimal() +
+    theme(axis.title.x = element_blank())
+  
+  # Remainder component plot
+  p4 <- ggplot(stl_df, aes(x = date, y = remainder)) +
+    geom_line(color = color, size = 0.5) +
+    geom_hline(yintercept = 0, linetype = "dashed", color = "gray50") +
+    labs(y = "Remainder", x = "Date") +
+    theme_minimal()
+  
+  # Combine the plots
+  if (requireNamespace("cowplot", quietly = TRUE)) {
+    combined <- cowplot::plot_grid(p1, p2, p3, p4, ncol = 1, align = "v")
+    return(combined)
+  } else {
+    # Return individual plots if cowplot is not available
+    print(p1)
+    print(p2)
+    print(p3)
+    print(p4)
+    return(NULL)
+  }
+}
+
+# Create and display the decomposition plots
+north_decomp_plot <- create_stl_plot(north_stl_df, "North Coast", "blue")
+south_decomp_plot <- create_stl_plot(south_stl_df, "South Coast", "red")
+
+if (!is.null(north_decomp_plot) && !is.null(south_decomp_plot)) {
+  print(north_decomp_plot)
+  print(south_decomp_plot)
+}
+
+#=========================================
+# 4. ANALYZE THE SEASONAL COMPONENT
+#=========================================
+
+# Extract the seasonal pattern by month
+get_seasonal_pattern <- function(seasonal_component, location) {
+  # Convert to data frame
+  dates <- as.Date(time(seasonal_component), origin = "1970-01-01")
+  seasonal_df <- data.frame(
+    date = dates,
+    month = month(dates),
+    month_name = month.abb[month(dates)],
+    seasonal = as.numeric(seasonal_component)
+  )
+  
+  # Calculate average seasonal effect by month
+  monthly_pattern <- seasonal_df %>%
+    group_by(month, month_name) %>%
+    summarize(mean_effect = mean(seasonal, na.rm = TRUE),
+              sd_effect = sd(seasonal, na.rm = TRUE),
+              .groups = "drop") %>%
+    arrange(month)
+  
+  # Calculate peak and trough months
+  peak_month <- monthly_pattern$month_name[which.max(monthly_pattern$mean_effect)]
+  trough_month <- monthly_pattern$month_name[which.min(monthly_pattern$mean_effect)]
+  
+  cat("\n==== SEASONAL PATTERN ANALYSIS FOR", location, "====\n")
+  cat("Peak month:", peak_month, "\n")
+  cat("Trough month:", trough_month, "\n")
+  cat("Seasonal range:", round(max(monthly_pattern$mean_effect) - min(monthly_pattern$mean_effect), 4), "\n")
+  cat("Seasonal contribution (% of total variation):", 
+      round(var(as.numeric(seasonal_component), na.rm = TRUE) / 
+              var(as.numeric(seasonal_component) + as.numeric(north_trend), na.rm = TRUE) * 100, 1), "%\n\n")
+  
+  # Plot the monthly pattern
+  month_order <- order(monthly_pattern$month)
+  p <- ggplot(monthly_pattern, aes(x = factor(month_name, levels = month.abb[monthly_pattern$month[month_order]]), 
+                                   y = mean_effect)) +
+    geom_bar(stat = "identity", fill = ifelse(monthly_pattern$mean_effect >= 0, "darkgreen", "darkred"), 
+             alpha = 0.7) +
+    geom_errorbar(aes(ymin = mean_effect - sd_effect, ymax = mean_effect + sd_effect), 
+                  width = 0.2) +
+    labs(title = paste(location, "Average Seasonal Pattern"),
+         x = "Month", 
+         y = "Seasonal Effect on Chlorophyll-a") +
+    theme_minimal() +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1))
+  
+  print(p)
+  
+  return(monthly_pattern)
+}
+
+# Analyze seasonal patterns
+north_seasonal_pattern <- get_seasonal_pattern(north_seasonal, "NORTH COAST")
+south_seasonal_pattern <- get_seasonal_pattern(south_seasonal, "SOUTH COAST")
+
+# Compare seasonal patterns between locations
+seasonal_comparison <- left_join(
+  north_seasonal_pattern %>% select(month, month_name, north_effect = mean_effect),
+  south_seasonal_pattern %>% select(month, south_effect = mean_effect),
+  by = "month"
+) %>%
+  arrange(month)
+
+# Plot comparison
+ggplot(seasonal_comparison, aes(x = factor(month_name, levels = month.abb))) +
+  geom_line(aes(y = north_effect, group = 1, color = "North Coast"), size = 1) +
+  geom_line(aes(y = south_effect, group = 1, color = "South Coast"), size = 1) +
+  geom_point(aes(y = north_effect, color = "North Coast"), size = 3) +
+  geom_point(aes(y = south_effect, color = "South Coast"), size = 3) +
+  scale_color_manual(values = c("North Coast" = "blue", "South Coast" = "red")) +
+  labs(title = "Comparison of Seasonal Patterns",
+       x = "Month", 
+       y = "Seasonal Effect on Chlorophyll-a",
+       color = "Location") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1),
+        legend.position = "bottom")
+
+#=========================================
+# 5. ANALYZE THE TREND COMPONENT
+#=========================================
+
+# Function to analyze the trend component
+analyze_trend <- function(trend_component, location) {
+  # Convert to data frame for analysis
+  trend_df <- data.frame(
+    date = as.Date(time(trend_component), origin = "1970-01-01"),
+    trend = as.numeric(trend_component),
+    year = year(as.Date(time(trend_component), origin = "1970-01-01"))
+  )
+  
+  # Calculate basic statistics
+  start_value <- trend_df$trend[1]
+  end_value <- trend_df$trend[nrow(trend_df)]
+  min_value <- min(trend_df$trend, na.rm = TRUE)
+  max_value <- max(trend_df$trend, na.rm = TRUE)
+  
+  # Calculate overall and annual change
+  overall_change <- end_value - start_value
+  overall_pct_change <- (overall_change / start_value) * 100
+  years_span <- as.numeric(difftime(max(trend_df$date), min(trend_df$date), units = "days")) / 365.25
+  annual_pct_change <- overall_pct_change / years_span
+  
+  cat("\n==== TREND ANALYSIS FOR", location, "====\n")
+  cat("Start value:", round(start_value, 4), "\n")
+  cat("End value:", round(end_value, 4), "\n")
+  cat("Minimum value:", round(min_value, 4), "\n")
+  cat("Maximum value:", round(max_value, 4), "\n")
+  cat("Overall change:", round(overall_change, 4), 
+      "(" , round(overall_pct_change, 1), "%)\n")
+  cat("Average annual change:", round(annual_pct_change, 2), "% per year\n")
+  
+  # Trend contribution to total variation
+  trend_var <- var(trend_df$trend, na.rm = TRUE)
+  total_var <- var(trend_df$trend + as.numeric(north_seasonal), na.rm = TRUE)
+  cat("Trend contribution (% of total variation):", 
+      round(trend_var / total_var * 100, 1), "%\n\n")
+  
+  # Detect change points in the trend
+  if (requireNamespace("changepoint", quietly = TRUE)) {
+    library(changepoint)
+    
+    # Mean change points
+    cpt_mean <- cpt.mean(trend_df$trend, method = "PELT")
+    
+    if (length(cpt_mean@cpts) > 1 || cpt_mean@cpts[1] != length(trend_df$trend)) {
+      # Extract change points
+      change_indices <- cpt_mean@cpts
+      change_dates <- trend_df$date[change_indices]
+      
+      cat("Detected change points in trend:\n")
+      for (i in 1:length(change_dates)) {
+        cat("- ", format(change_dates[i], "%Y-%m"), "\n")
+      }
+      
+      # Add change points to the data frame
+      trend_df$changepoint <- FALSE
+      trend_df$changepoint[change_indices] <- TRUE
+      
+      # Add segment information
+      segments <- c(0, change_indices)
+      trend_df$segment <- 0
+      for (i in 1:(length(segments)-1)) {
+        trend_df$segment[(segments[i]+1):segments[i+1]] <- i
+      }
+      
+      # Calculate segment slopes
+      segment_stats <- trend_df %>%
+        group_by(segment) %>%
+        summarize(
+          start_date = first(date),
+          end_date = last(date),
+          start_value = first(trend),
+          end_value = last(trend),
+          duration_years = as.numeric(difftime(last(date), first(date), units = "days")) / 365.25,
+          change_per_year = (end_value - start_value) / duration_years,
+          pct_change_per_year = (change_per_year / start_value) * 100,
+          .groups = "drop"
+        )
+      
+      cat("\nTrend segments:\n")
+      for (i in 1:nrow(segment_stats)) {
+        cat("Segment", i, ":", format(segment_stats$start_date[i], "%Y-%m"), "to", 
+            format(segment_stats$end_date[i], "%Y-%m"), ":\n")
+        cat("  Change per year:", round(segment_stats$change_per_year[i], 4), 
+            "(", round(segment_stats$pct_change_per_year[i], 2), "% per year)\n")
+      }
+      
+      # Create a plot with change points
+      p <- ggplot(trend_df, aes(x = date, y = trend)) +
+        geom_line(size = 1, color = "darkblue") +
+        geom_point(data = subset(trend_df, changepoint), 
+                   color = "red", size = 3) +
+        labs(title = paste(location, "Chlorophyll-a Trend with Change Points"),
+             x = "Date", 
+             y = "Trend Component") +
+        theme_minimal()
+      
+      print(p)
+      
+      return(list(
+        trend_df = trend_df,
+        change_points = change_dates,
+        segment_stats = segment_stats
+      ))
+    } else {
+      cat("No significant change points detected in the trend.\n")
+      
+      # Simple trend plot
+      p <- ggplot(trend_df, aes(x = date, y = trend)) +
+        geom_line(size = 1, color = "darkblue") +
+        labs(title = paste(location, "Chlorophyll-a Trend"),
+             x = "Date", 
+             y = "Trend Component") +
+        theme_minimal()
+      
+      print(p)
+      
+      return(list(
+        trend_df = trend_df,
+        change_points = NULL,
+        segment_stats = NULL
+      ))
+    }
+  } else {
+    cat("Install the 'changepoint' package for change point detection.\n")
+    
+    # Simple trend plot
+    p <- ggplot(trend_df, aes(x = date, y = trend)) +
+      geom_line(size = 1, color = "darkblue") +
+      labs(title = paste(location, "Chlorophyll-a Trend"),
+           x = "Date", 
+           y = "Trend Component") +
+      theme_minimal()
+    
+    print(p)
+    
+    return(list(
+      trend_df = trend_df,
+      change_points = NULL,
+      segment_stats = NULL
+    ))
+  }
+}
+
+# Analyze trends for both locations
+north_trend_analysis <- analyze_trend(north_trend, "NORTH COAST")
+south_trend_analysis <- analyze_trend(south_trend, "SOUTH COAST")
+
+# Compare trends between locations
+trend_comparison <- data.frame(
+  date = north_stl_df$date,  # Assuming both have the same dates
+  north_trend = north_stl_df$trend,
+  south_trend = south_stl_df$trend
+)
+
+# Plot comparison
+ggplot(trend_comparison, aes(x = date)) +
+  geom_line(aes(y = north_trend, color = "North Coast"), size = 1) +
+  geom_line(aes(y = south_trend, color = "South Coast"), size = 1) +
+  scale_color_manual(values = c("North Coast" = "blue", "South Coast" = "red")) +
+  labs(title = "Comparison of Chlorophyll-a Trends",
+       x = "Date", 
+       y = "Trend Component",
+       color = "Location") +
+  theme_minimal() +
+  theme(legend.position = "bottom")
+
+#=========================================
+# 6. ANALYZE THE REMAINDER COMPONENT
+#=========================================
+
+# Function to analyze the remainder component
+analyze_remainder <- function(remainder_component, location) {
+  # Convert to data frame
+  remainder_df <- data.frame(
+    date = as.Date(time(remainder_component), origin = "1970-01-01"),
+    remainder = as.numeric(remainder_component)
+  )
+  
+  # Basic statistics
+  remainder_mean <- mean(remainder_df$remainder, na.rm = TRUE)
+  remainder_sd <- sd(remainder_df$remainder, na.rm = TRUE)
+  remainder_var <- var(remainder_df$remainder, na.rm = TRUE)
+  
+  # Calculate contribution to total variation
+  total_var <- var(as.numeric(remainder_component) + 
+                     as.numeric(north_trend) + 
+                     as.numeric(north_seasonal), na.rm = TRUE)
+  
+  cat("\n==== REMAINDER ANALYSIS FOR", location, "====\n")
+  cat("Mean:", round(remainder_mean, 6), "(should be close to zero)\n")
+  cat("Standard deviation:", round(remainder_sd, 4), "\n")
+  cat("Remainder contribution (% of total variation):", 
+      round(remainder_var / total_var * 100, 1), "%\n")
+  
+  # Check for normality in remainder
+  shapiro_test <- shapiro.test(remainder_df$remainder)
+  cat("Shapiro-Wilk test for normality: p-value =", round(shapiro_test$p.value, 4), "\n")
+  cat("Interpretation: p > 0.05 suggests normally distributed residuals\n\n")
+  
+  # Check for autocorrelation in remainder
+  Box.test(remainder_df$remainder, lag = 20, type = "Ljung-Box")
+  cat("Ljung-Box test for autocorrelation: p-value =", 
+      round(Box.test(remainder_df$remainder, lag = 20, type = "Ljung-Box")$p.value, 4), "\n")
+  cat("Interpretation: p > 0.05 suggests no significant autocorrelation\n\n")
+  
+  # Plot remainder
+  p1 <- ggplot(remainder_df, aes(x = date, y = remainder)) +
+    geom_line(color = "darkgray") +
+    geom_hline(yintercept = 0, linetype = "dashed", color = "red") +
+    labs(title = paste(location, "Remainder Component"),
+         x = "Date", 
+         y = "Remainder") +
+    theme_minimal()
+  
+  # Plot histogram
+  p2 <- ggplot(remainder_df, aes(x = remainder)) +
+    geom_histogram(bins = 30, fill = "darkgray", color = "black", alpha = 0.7) +
+    geom_density(alpha = 0.2, fill = "blue") +
+    labs(title = paste(location, "Remainder Distribution"),
+         x = "Remainder Value", 
+         y = "Frequency") +
+    theme_minimal()
+  
+  # Plot ACF
+  acf_data <- acf(remainder_df$remainder, plot = FALSE)
+  acf_df <- data.frame(
+    lag = acf_data$lag,
+    acf = acf_data$acf
+  )
+  
+  p3 <- ggplot(acf_df, aes(x = lag, y = acf)) +
+    geom_bar(stat = "identity", fill = "darkblue", width = 0.5) +
+    geom_hline(yintercept = 0, linetype = "solid", color = "black") +
+    geom_hline(yintercept = c(1.96, -1.96)/sqrt(length(remainder_df$remainder)), 
+               linetype = "dashed", color = "red") +
+    labs(title = paste(location, "ACF of Remainder"),
+         x = "Lag", 
+         y = "ACF") +
+    theme_minimal()
+  
+  # Display plots
+  print(p1)
+  print(p2)
+  print(p3)
+  
+  return(list(
+    remainder_df = remainder_df,
+    stats = list(
+      mean = remainder_mean,
+      sd = remainder_sd,
+      var_contribution = remainder_var / total_var * 100,
+      normal = shapiro_test$p.value > 0.05,
+      no_autocorr = Box.test(remainder_df$remainder, lag = 20, type = "Ljung-Box")$p.value > 0.05
+    )
+  ))
+}
+
+# Analyze remainder for both locations
+north_remainder_analysis <- analyze_remainder(north_remainder, "NORTH COAST")
+south_remainder_analysis <- analyze_remainder(south_remainder, "SOUTH COAST")
+
+#=========================================
+# 7. COMPARISON WITH GAM AND SARIMA MODELS
+#=========================================
+
+cat("\n==== COMPARISON WITH GAM AND SARIMA MODELS ====\n")
+
+# Function to compare STL trend with GAM
+compare_stl_gam <- function(stl_trend, gam_model, data, location) {
+  # Extract GAM predicted values for comparison
+  # This assumes the GAM model was fit with date_numeric as predictor
+  if (exists("gam_model") && !is.null(gam_model)) {
+    # Create a data frame with dates and trends
+    comparison_df <- data.frame(
+      date = as.Date(time(stl_trend), origin = "1970-01-01"),
+      stl_trend = as.numeric(stl_trend)
+    )
+    
+    # Add GAM predicted values if available
+    if (location == "NORTH COAST" && exists("gam_model_north")) {
+      # Create a sequence of dates matching the STL trend dates
+      pred_dates <- data.frame(
+        date_numeric = as.numeric(comparison_df$date)
+      )
+      
+      # Predict GAM values
+      pred_gam <- predict(gam_model_north, newdata = pred_dates)
+      comparison_df$gam_trend <- pred_gam
+      
+      # Plot comparison
+      p <- ggplot(comparison_df, aes(x = date)) +
+        geom_line(aes(y = stl_trend, color = "STL Trend"), size = 1) +
+        geom_line(aes(y = gam_trend, color = "GAM Trend"), size = 1, linetype = "dashed") +
+        scale_color_manual(values = c("STL Trend" = "blue", "GAM Trend" = "darkgreen")) +
+        labs(title = paste(location, "STL vs GAM Trend Comparison"),
+             x = "Date", 
+             y = "Trend",
+             color = "Model") +
+        theme_minimal() +
+        theme(legend.position = "bottom")
+      
+      print(p)
+      
+      # Calculate correlation
+      cor_val <- cor(comparison_df$stl_trend, comparison_df$gam_trend, use = "complete.obs")
+      cat("\nCorrelation between STL and GAM trends for", location, ":", round(cor_val, 3), "\n")
+      
+      return(comparison_df)
+    } else if (location == "SOUTH COAST" && exists("gam_model_south")) {
+      # Same for south coast
+      pred_dates <- data.frame(
+        date_numeric = as.numeric(comparison_df$date)
+      )
+      
+      pred_gam <- predict(gam_model_south, newdata = pred_dates)
+      comparison_df$gam_trend <- pred_gam
+      
+      p <- ggplot(comparison_df, aes(x = date)) +
+        geom_line(aes(y = stl_trend, color = "STL Trend"), size = 1) +
+        geom_line(aes(y = gam_trend, color = "GAM Trend"), size = 1, linetype = "dashed") +
+        scale_color_manual(values = c("STL Trend" = "red", "GAM Trend" = "darkgreen")) +
+        labs(title = paste(location, "STL vs GAM Trend Comparison"),
+             x = "Date", 
+             y = "Trend",
+             color = "Model") +
+        theme_minimal() +
+        theme(legend.position = "bottom")
+      
+      print(p)
+      
+      cor_val <- cor(comparison_df$stl_trend, comparison_df$gam_trend, use = "complete.obs")
+      cat("\nCorrelation between STL and GAM trends for", location, ":", round(cor_val, 3), "\n")
+      
+      return(comparison_df)
+    } else {
+      cat("\nGAM model not found for", location, ". Skipping comparison.\n")
+      return(NULL)
+    }
+  } else {
+    cat("\nGAM model not found. Skipping comparison.\n")
+    return(NULL)
+  }
+}
+
+# Compare STL with GAM
+north_stl_gam_comp <- compare_stl_gam(north_trend, gam_model_north, north_data, "NORTH COAST")
+south_stl_gam_comp <- compare_stl_gam(south_trend, gam_model_south, south_data, "SOUTH COAST")
+
+# Compare with SARIMA fitted values if available
+if (exists("north_sarima") && exists("south_sarima")) {
+  cat("\n==== COMPARING STL WITH SARIMA ====\n")
+  cat("Note: SARIMA models include both trend and seasonal components combined\n")
+  
+  # Extract fitted values from SARIMA models
+  north_sarima_fitted <- fitted(north_sarima)
+  south_sarima_fitted <- fitted(south_sarima)
+  
+  # Create data frames for comparison
+  north_sarima_df <- data.frame(
+    date = as.Date(time(north_ts), origin = "1970-01-01"),
+    observed = as.numeric(north_ts),
+    sarima_fitted = as.numeric(north_sarima_fitted),
+    stl_fitted = as.numeric(north_trend) + as.numeric(north_seasonal)
+  )
+  
+  south_sarima_df <- data.frame(
+    date = as.Date(time(south_ts), origin = "1970-01-01"),
+    observed = as.numeric(south_ts),
+    sarima_fitted = as.numeric(south_sarima_fitted),
+    stl_fitted = as.numeric(south_trend) + as.numeric(south_seasonal)
+  )
+  
+  # Plot comparison for North Coast
+  p1 <- ggplot(north_sarima_df, aes(x = date)) +
+    geom_line(aes(y = observed, color = "Observed"), alpha = 0.5) +
+    geom_line(aes(y = sarima_fitted, color = "SARIMA Fitted"), size = 1) +
+    geom_line(aes(y = stl_fitted, color = "STL Fitted"), size = 1, linetype = "dashed") +
+    scale_color_manual(values = c("Observed" = "black", "SARIMA Fitted" = "blue", 
+                                  "STL Fitted" = "darkgreen")) +
+    labs(title = "North Coast: SARIMA vs STL Fitted Values",
+         x = "Date", 
+         y = "Chlorophyll-a",
+         color = "Series") +
+    theme_minimal() +
+    theme(legend.position = "bottom")
+  
+  # Plot comparison for South Coast
+  p2 <- ggplot(south_sarima_df, aes(x = date)) +
+    geom_line(aes(y = observed, color = "Observed"), alpha = 0.5) +
+    geom_line(aes(y = sarima_fitted, color = "SARIMA Fitted"), size = 1) +
+    geom_line(aes(y = stl_fitted, color = "STL Fitted"), size = 1, linetype = "dashed") +
+    scale_color_manual(values = c("Observed" = "black", "SARIMA Fitted" = "red", 
+                                  "STL Fitted" = "darkgreen")) +
+    labs(title = "South Coast: SARIMA vs STL Fitted Values",
+         x = "Date", 
+         y = "Chlorophyll-a",
+         color = "Series") +
+    theme_minimal() +
+    theme(legend.position = "bottom")
+  
+  print(p1)
+  print(p2)
+  
+  # Calculate metrics to compare fits
+  north_sarima_rmse <- sqrt(mean((north_sarima_df$observed - north_sarima_df$sarima_fitted)^2, na.rm = TRUE))
+  north_stl_rmse <- sqrt(mean((north_sarima_df$observed - north_sarima_df$stl_fitted)^2, na.rm = TRUE))
+  
+  south_sarima_rmse <- sqrt(mean((south_sarima_df$observed - south_sarima_df$sarima_fitted)^2, na.rm = TRUE))
+  south_stl_rmse <- sqrt(mean((south_sarima_df$observed - south_sarima_df$stl_fitted)^2, na.rm = TRUE))
+  
+  cat("\nNorth Coast RMSE comparison:\n")
+  cat("SARIMA RMSE:", round(north_sarima_rmse, 4), "\n")
+  cat("STL RMSE:", round(north_stl_rmse, 4), "\n")
+  cat("Difference:", round(north_sarima_rmse - north_stl_rmse, 4), 
+      "(Negative values favor SARIMA, positive values favor STL)\n\n")
+  
+  cat("South Coast RMSE comparison:\n")
+  cat("SARIMA RMSE:", round(south_sarima_rmse, 4), "\n")
+  cat("STL RMSE:", round(south_stl_rmse, 4), "\n")
+  cat("Difference:", round(south_sarima_rmse - south_stl_rmse, 4), 
+      "(Negative values favor SARIMA, positive values favor STL)\n\n")
+}
+
+#=========================================
+# 8. SEASONAL-TREND INTERACTION ANALYSIS
+#=========================================
+
+# Check if seasonal patterns have changed over time
+cat("\n==== ANALYZING SEASONAL-TREND INTERACTIONS ====\n")
+
+# Function to analyze if seasonal patterns change over time
+analyze_seasonal_changes <- function(ts_obj, location) {
+  # First, divide the time series into segments
+  ts_length <- length(ts_obj)
+  n_segments <- floor(ts_length / 24)  # At least 2 years per segment
+  
+  if (n_segments >= 2) {
+    cat("\nAnalyzing seasonal pattern changes for", location, "\n")
+    cat("Dividing data into", n_segments, "segments of approximately 2 years each\n")
+    
+    # Create a data frame for analysis
+    ts_df <- data.frame(
+      date = as.Date(time(ts_obj), origin = "1970-01-01"),
+      value = as.numeric(ts_obj),
+      month = month(as.Date(time(ts_obj), origin = "1970-01-01")),
+      month_name = month.abb[month(as.Date(time(ts_obj), origin = "1970-01-01"))],
+      year = year(as.Date(time(ts_obj), origin = "1970-01-01"))
+    )
+    
+    # Assign segments
+    segment_size <- ceiling(nrow(ts_df) / n_segments)
+    ts_df$segment <- ceiling(seq_len(nrow(ts_df)) / segment_size)
+    
+    # Calculate monthly averages by segment
+    segment_monthly <- ts_df %>%
+      group_by(segment, month, month_name) %>%
+      summarize(mean_value = mean(value, na.rm = TRUE),
+                start_date = min(date),
+                end_date = max(date),
+                .groups = "drop") %>%
+      arrange(segment, month)
+    
+    # Create segment labels for plotting
+    segment_labels <- segment_monthly %>%
+      group_by(segment) %>%
+      summarize(start_date = min(start_date),
+                end_date = max(end_date),
+                label = paste(format(min(start_date), "%Y-%m"), 
+                              "to", 
+                              format(max(end_date), "%Y-%m")),
+                .groups = "drop")
+    
+    segment_monthly <- left_join(segment_monthly, segment_labels, by = "segment")
+    
+    # Plot seasonal patterns by segment
+    p <- ggplot(segment_monthly, aes(x = factor(month_name, levels = month.abb), 
+                                     y = mean_value, 
+                                     group = segment, 
+                                     color = factor(segment))) +
+      geom_line(size = 1) +
+      geom_point(size = 2) +
+      labs(title = paste(location, "Seasonal Patterns Over Time"),
+           subtitle = "Each line represents a different time period",
+           x = "Month", 
+           y = "Chlorophyll-a",
+           color = "Period") +
+      scale_color_discrete(labels = segment_labels$label) +
+      theme_minimal() +
+      theme(axis.text.x = element_text(angle = 45, hjust = 1),
+            legend.position = "bottom")
+    
+    print(p)
+    
+    # Test if seasonal patterns are significantly different between segments
+    # We'll use a simple ANOVA test for each month
+    seasonal_change_test <- data.frame(month = 1:12, p_value = NA)
+    for (m in 1:12) {
+      month_data <- filter(segment_monthly, month == m)
+      if (nrow(month_data) >= n_segments) {
+        # Only run test if we have data for all segments
+        model <- aov(mean_value ~ factor(segment), data = month_data)
+        seasonal_change_test$p_value[m] <- summary(model)[[1]][["Pr(>F)"]][1]
+      }
+    }
+    
+    # Adjust p-values for multiple testing
+    seasonal_change_test$p_adj <- p.adjust(seasonal_change_test$p_value, method = "BH")
+    seasonal_change_test$month_name <- month.abb[seasonal_change_test$month]
+    seasonal_change_test$significant <- seasonal_change_test$p_adj < 0.05
+    
+    cat("\nMonths with significant changes in seasonal pattern over time:\n")
+    sig_months <- seasonal_change_test %>% filter(significant)
+    if (nrow(sig_months) > 0) {
+      for (i in 1:nrow(sig_months)) {
+        cat("- ", sig_months$month_name[i], "(adjusted p-value =", round(sig_months$p_adj[i], 4), ")\n")
+      }
+    } else {
+      cat("No significant changes detected in seasonal patterns over time.\n")
+    }
+    
+    return(list(
+      segment_monthly = segment_monthly,
+      seasonal_change_test = seasonal_change_test
+    ))
+  } else {
+    cat("\nInsufficient data to analyze seasonal changes over time for", location, "\n")
+    cat("Need at least 4 years of data (48 observations) for this analysis.\n")
+    return(NULL)
+  }
+}
+
+# Analyze seasonal changes for both locations
+north_seasonal_changes <- analyze_seasonal_changes(north_ts, "NORTH COAST")
+south_seasonal_changes <- analyze_seasonal_changes(south_ts, "SOUTH COAST")
+
+#=========================================
+# 9. ENVIRONMENTAL INTERPRETATION
+#=========================================
+
+cat("\n==== ENVIRONMENTAL INTERPRETATION ====\n")
+
+# North Coast summary
+cat("\nNORTH COAST CHLOROPHYLL-A PATTERNS:\n")
+cat("1. Seasonal Pattern:\n")
+cat("   - Peak month(s): ", north_seasonal_pattern$month_name[which.max(north_seasonal_pattern$mean_effect)], "\n")
+cat("   - Trough month(s): ", north_seasonal_pattern$month_name[which.min(north_seasonal_pattern$mean_effect)], "\n")
+
+if (!is.null(north_trend_analysis$segment_stats)) {
+  cat("2. Long-term Trend Segments:\n")
+  for (i in 1:nrow(north_trend_analysis$segment_stats)) {
+    direction <- ifelse(north_trend_analysis$segment_stats$pct_change_per_year[i] > 0, 
+                        "Increasing", "Decreasing")
+    cat("   - ", format(north_trend_analysis$segment_stats$start_date[i], "%Y-%m"), "to", 
+        format(north_trend_analysis$segment_stats$end_date[i], "%Y-%m"), ": ", 
+        direction, " at ", 
+        round(abs(north_trend_analysis$segment_stats$pct_change_per_year[i]), 2), 
+        "% per year\n")
+  }
+} else {
+  cat("2. Long-term Trend:\n")
+  direction <- ifelse(north_trend_analysis$trend_df$trend[nrow(north_trend_analysis$trend_df)] > 
+                        north_trend_analysis$trend_df$trend[1], "Increasing", "Decreasing")
+  cat("   - Overall pattern: ", direction, "\n")
+}
+
+cat("3. Variability Components:\n")
+if (exists("north_stl")) {
+  var_trend <- var(north_stl$time.series[, "trend"], na.rm = TRUE)
+  var_seasonal <- var(north_stl$time.series[, "seasonal"], na.rm = TRUE)
+  var_remainder <- var(north_stl$time.series[, "remainder"], na.rm = TRUE)
+  var_total <- var_trend + var_seasonal + var_remainder
+  
+  cat("   - Trend contribution: ", round(var_trend / var_total * 100, 1), "%\n")
+  cat("   - Seasonal contribution: ", round(var_seasonal / var_total * 100, 1), "%\n")
+  cat("   - Random variation: ", round(var_remainder / var_total * 100, 1), "%\n")
+}
+
+# South Coast summary
+cat("\nSOUTH COAST CHLOROPHYLL-A PATTERNS:\n")
+cat("1. Seasonal Pattern:\n")
+cat("   - Peak month(s): ", south_seasonal_pattern$month_name[which.max(south_seasonal_pattern$mean_effect)], "\n")
+cat("   - Trough month(s): ", south_seasonal_pattern$month_name[which.min(south_seasonal_pattern$mean_effect)], "\n")
+
+if (!is.null(south_trend_analysis$segment_stats)) {
+  cat("2. Long-term Trend Segments:\n")
+  for (i in 1:nrow(south_trend_analysis$segment_stats)) {
+    direction <- ifelse(south_trend_analysis$segment_stats$pct_change_per_year[i] > 0, 
+                        "Increasing", "Decreasing")
+    cat("   - ", format(south_trend_analysis$segment_stats$start_date[i], "%Y-%m"), "to", 
+        format(south_trend_analysis$segment_stats$end_date[i], "%Y-%m"), ": ", 
+        direction, " at ", 
+        round(abs(south_trend_analysis$segment_stats$pct_change_per_year[i]), 2), 
+        "% per year\n")
+  }
+} else {
+  cat("2. Long-term Trend:\n")
+  direction <- ifelse(south_trend_analysis$trend_df$trend[nrow(south_trend_analysis$trend_df)] > 
+                        south_trend_analysis$trend_df$trend[1], "Increasing", "Decreasing")
+  cat("   - Overall pattern: ", direction, "\n")
+}
+
+cat("3. Variability Components:\n")
+if (exists("south_stl")) {
+  var_trend <- var(south_stl$time.series[, "trend"], na.rm = TRUE)
+  var_seasonal <- var(south_stl$time.series[, "seasonal"], na.rm = TRUE)
+  var_remainder <- var(south_stl$time.series[, "remainder"], na.rm = TRUE)
+  var_total <- var_trend + var_seasonal + var_remainder
+  
+  cat("   - Trend contribution: ", round(var_trend / var_total * 100, 1), "%\n")
+  cat("   - Seasonal contribution: ", round(var_seasonal / var_total * 100, 1), "%\n")
+  cat("   - Random variation: ", round(var_remainder / var_total * 100, 1), "%\n")
+}
+
+cat("\nPOTENTIAL ENVIRONMENTAL DRIVERS TO CONSIDER:\n")
+cat("1. Seasonal drivers of chlorophyll-a:\n")
+cat("   - Monsoon patterns and rainfall (runoff and nutrients)\n")
+cat("   - Seasonal upwelling and currents\n")
+cat("   - Wind patterns affecting mixing and stratification\n")
+cat("   - Seasonal river discharge\n")
+cat("   - Light availability\n\n")
+
+cat("2. Potential drivers of long-term trends:\n")
+cat("   - Climate change and ocean warming\n")
+cat("   - Changes in land use and coastal development\n")
+cat("   - Changes in fishing pressure affecting trophic cascades\n")
+cat("   - Long-term climate oscillations (ENSO, IOD, PDO)\n")
+cat("   - Changes in coastal management or marine protection\n")
+
+#=========================================
+# 10. FINAL COMPARISON OF ALL MODELS
+#=========================================
+
+cat("\n\n==== FINAL COMPARISON OF ALL MODELS ====\n")
+
+cat("\nEach modeling approach provides different insights:\n")
+
+cat("\n1. LINEAR REGRESSION:\n")
+cat("   - Simple, but inadequate for capturing non-linear patterns and seasonality\n")
+cat("   - Useful only as a baseline for comparison\n")
+
+cat("\n2. GAM MODEL:\n")
+cat("   - Captures smooth non-linear trends\n")
+cat("   - Flexible with no pre-specified pattern\n")
+cat("   - Provides degrees of freedom as a measure of complexity\n")
+cat("   - Doesn't explicitly separate seasonal and trend components\n")
+
+cat("\n3. SARIMA MODEL:\n")
+cat("   - Accounts for autocorrelation and seasonality\n")
+cat("   - Good for forecasting future values\n")
+cat("   - Provides formal statistical tests and confidence intervals\n")
+cat("   - Doesn't provide easy visualization of separate trend component\n")
+
+cat("\n4. STL DECOMPOSITION:\n")
+cat("   - Clearly separates trend, seasonal, and remainder components\n")
+cat("   - Visualizes how each component contributes to total variation\n")
+cat("   - Allows analysis of each component separately\n")
+cat("   - Identifies change points in the trend component\n")
+cat("   - Examines if seasonal patterns change over time\n")
+cat("   - Not a formal statistical model (no p-values for overall fit)\n")
+
+cat("\nRECOMMENDATIONS FOR REPORTING RESULTS:\n")
+cat("1. Use STL decomposition for descriptive analysis and visualization\n")
+cat("2. Use GAM for reporting non-linear trends with statistical significance\n")
+cat("3. Use SARIMA for forecasting and formal time series inference\n")
+cat("4. For scientific publications, report results from multiple models for robustness\n\n")
+
+cat("FINAL INTERPRETATION FOR TIMOR-LESTE CHLOROPHYLL-A DATA:\n")
+cat("North and South Coast chlorophyll-a show distinct patterns:\n")
+cat("- Seasonal cycles peak in different months, likely due to different oceanographic regimes\n")
+cat("- Long-term trends show different change points and directions\n")
+cat("- The South Coast shows stronger seasonality compared to the North Coast\n")
+cat("These differences highlight the importance of spatial variation in marine ecosystem monitoring\n")
 
 # 7. Summary of findings
 cat("\n\n======== SUMMARY OF FINDINGS ========\n")
