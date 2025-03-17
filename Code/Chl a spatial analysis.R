@@ -12,7 +12,7 @@ library(stars)      # For spatial data without raster
 library(viridis)    # For nice color palettes
 
 # Set your file path - update this with your actual file location
-netcdf_file <- "path/to/your/download.nc"
+netcdf_file <- "/Users/louwclaassens/Documents/Documents - Louw’s MacBook Air/WorldFish/Ikan Ba Futura_2023/Science and colabs/Ecological Modeling/Timor-Leste South Coast/Timor_South_Ecopath/Timor_Ecopath/Data/Chla data/MODISA_L3m_CHL_Time-Averaged_2019-2024.nc"
 
 # Basic exploration of NetCDF structure
 # Open the NetCDF file
@@ -30,7 +30,7 @@ dim_names <- names(nc$dim)
 cat("Dimensions in this NetCDF file:", paste(dim_names, collapse = ", "), "\n\n")
 
 # Assuming chlorophyll is named "chlor_a" - adjust if your variable has a different name
-chl_var_name <- "chlor_a"
+chl_var_name <- "MODISA_L3m_CHL_Mo_4km_R2022_0_chlor_a"
 if(!(chl_var_name %in% var_names)) {
   cat("Variable", chl_var_name, "not found. Please check the variable names listed above.\n")
   cat("You may need to update the chl_var_name variable in this script.\n")
@@ -60,7 +60,7 @@ if(has_time) {
 
 # Read the data using stars package
 # This approach avoids using the raster package entirely
-chl_stars <- read_ncdf(netcdf_file)
+chl_stars <- read_ncdf("/Users/louwclaassens/Documents/Documents - Louw’s MacBook Air/WorldFish/Ikan Ba Futura_2023/Science and colabs/Ecological Modeling/Timor-Leste South Coast/Timor_South_Ecopath/Timor_Ecopath/Data/Chla data/MODISA_L3m_CHL_Time-Averaged_2019-2024.nc")
 
 # Examine the stars object
 print(chl_stars)
@@ -113,7 +113,7 @@ clean_chl <- function(x) {
 chl_df_fixed <- data.frame(
   lon = chl_df$lon,
   lat = chl_df$lat,
-  chl = sapply(as.character(chl_df$chl), clean_chl)
+  chl = sapply(as.character(chl_df$MODISA_L3m_CHL_Mo_4km_R2022_0_chlor_a), clean_chl)
 )
 
 cat("\nFixed data frame structure:\n")
@@ -209,14 +209,14 @@ ggplot(chl_df_zones, aes(x = lon, y = lat)) +
   annotate("text", 
            x = c(min(chl_df_clean$lon) + lon_range/4, 
                  min(chl_df_clean$lon) + 3*lon_range/4),
-           y = c(dividing_latitude + 0.3, dividing_latitude - 0.3),
+           y = c(dividing_latitude + 0.5, dividing_latitude - 0.3),
            label = c("North Coast", "South Coast"),
-           color = "white", fontface = "bold", size = 5) +
+           color = "black", fontface = "bold", size = 5) +
   coord_fixed() +
   theme_minimal() +
   labs(
-    title = "Chlorophyll a Concentration in Timor-Leste Waters",
-    subtitle = "North and South Coast Zones",
+    title = "Chlorophyll a Concentration in Timor-Leste Watera",
+    subtitle = "Time averaged 2019-2024",
     x = "Longitude",
     y = "Latitude"
   )
