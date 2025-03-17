@@ -15,9 +15,7 @@ library(readxl)     # For reading Excel files
 
 # Assuming the file is named "chla_data.xlsx" and contains columns for date, location (north/south), and chla values
 # Adjust the file path as needed
-chla_data <- read_csv("/Users/louwclaassens/Documents/Documents - Louw’s MacBook Air/WorldFish/Ikan Ba Futura_2023/Science and colabs/Ecological Modeling/Timor-Leste South Coast/Timor_South_Ecopath/Timor_Ecopath/Data/Chl a_Timor-Leste_2019-2024_Monthly Averages_North+South.csv")
-# If your data is in a specific sheet, you can specify it:
-# chla_data <- read_excel("chla_data.xlsx", sheet = "Sheet1")
+chla_data <- read_csv("/Users/louwclaassens/Documents/Documents - Louw’s MacBook Air/WorldFish/Ikan Ba Futura_2023/Science and colabs/Ecological Modeling/Timor-Leste South Coast/Timor_South_Ecopath/Timor_Ecopath/Data/Chla data/Chl a_Timor-Leste_2019-2024_Monthly Averages_North+South.csv")
 names(chla_data)
 
 # 2. Data Cleaning and Preparation
