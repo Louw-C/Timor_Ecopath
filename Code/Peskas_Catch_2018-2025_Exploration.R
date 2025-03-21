@@ -560,3 +560,45 @@ composition_plot <- ggplot(region_species,
   guides(fill = guide_legend(nrow = 2, byrow = TRUE))  # Arrange legend in multiple rows
 
 print(composition_plot)
+
+#-----------------------------------------------------------
+# DATA RELATIONSHIPS
+#-----------------------------------------------------------
+
+# Relationship between number of landings and total catch
+landing_catch_plot <- ggplot(catch_data, 
+                             aes(x = n_landings_per_boat, 
+                                 y = recorded_catch_kg)) +
+  geom_point(alpha = 0.3) +
+  geom_smooth(method = "lm", se = TRUE, color = "red") +
+  labs(
+    title = "Relationship Between Number of Landings and Recorded Catch",
+    x = "Number of Landings per Boat",
+    y = "Recorded Catch (kg)"
+  ) +
+  theme_minimal() +
+  scale_y_continuous(labels = comma) +
+  coord_cartesian(ylim = c(0, quantile(catch_data$recorded_catch_kg, 0.99, na.rm = TRUE)))  # Remove outliers for better visualization
+
+print(landing_catch_plot)
+
+# Correlation between recorded and estimated catch
+correlation_plot <- ggplot(catch_data, 
+                           aes(x = recorded_catch_kg, 
+                               y = estimated_catch_kg)) +
+  geom_point(alpha = 0.3) +
+  geom_smooth(method = "lm", se = TRUE, color = "red") +
+  labs(
+    title = "Correlation Between Recorded and Estimated Catch",
+    x = "Recorded Catch (kg)",
+    y = "Estimated Catch (kg)"
+  ) +
+  theme_minimal() +
+  scale_x_continuous(labels = comma) +
+  scale_y_continuous(labels = comma) +
+  coord_cartesian(
+    xlim = c(0, quantile(catch_data$recorded_catch_kg, 0.99, na.rm = TRUE)),
+    ylim = c(0, quantile(catch_data$estimated_catch_kg, 0.99, na.rm = TRUE))
+  )  # Remove outliers for better visualization
+
+print(correlation_plot)
