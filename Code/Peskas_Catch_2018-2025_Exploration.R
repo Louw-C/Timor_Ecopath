@@ -31,7 +31,39 @@ summary(catch_data)
 ##SORT OUT DATES AND ADD MONTH + YEAR COLUMNS
 #-----------------------------------------------------------
 
-# Convert date_bin_start to Date format
+# Convert date_bin_start to proper Date format
+# The format is "DD/MM/YY" so we use dmy() from lubridate
+catch_data <- catch_data %>%
+  mutate(date_bin_start = dmy(date_bin_start))
+
+# Verify the date conversion worked correctly
+summary(catch_data$date_bin_start)
+
+# Create additional date-based columns for analysis
+catch_data <- catch_data %>%
+  mutate(
+    year = year(date_bin_start),
+    month = month(date_bin_start),
+    month_name = month(date_bin_start, label = TRUE, abbr = TRUE),
+    quarter = quarter(date_bin_start),
+    year_month = format(date_bin_start, "%Y-%m")
+  )
+
+# Check if there are any NA values in the date column after conversion
+sum(is.na(catch_data$date_bin_start))
+
+# View a summary of the resulting data
+head(catch_data)
+summary(catch_data)
+
+# Optional: Basic time series of catch by month
+monthly_catch <- catch_data %>%
+  group_by(year_month) %>%
+  summarize(total_catch_kg = sum(estimated_catch_kg, na.rm = TRUE)) %>%
+  arrange(year_month)
+
+# View the first few months of data
+head(monthly_catch)# Convert date_bin_start to Date format
 catch_data$date_bin_start <- as.Date(catch_data$date_bin_start)
 
 # Check for missing values
